@@ -1,8 +1,8 @@
 .header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, .2);
-    padding: 20px auto;
+    /* border-bottom: 1px solid rgba(255, 255, 255, .2); */
+    padding: 20px 0;
 }
 .header__logo {
     font-family: 'Roboto Slab',  Arial, Helvetica, sans-serif;
@@ -22,7 +22,7 @@
 .header__button {
     -webkit-appearance: none;
 
-    border: 1px solid #FFF;
+    border: 1px solid #000;
     box-sizing: border-box;
     border-radius: 100px;
     background-color: transparent;
@@ -32,4 +32,8 @@
     margin-left: 42px;
     font-family: inherit;
     font-size: 18px;
+}
+
+.nav {
+    margin-bottom: 20px;
 }

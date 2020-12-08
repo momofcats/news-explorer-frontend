@@ -5,7 +5,7 @@ function Header() {
     <header className="header">
       <div className="header__logo">NewsExplorer</div>
       <div className="header__wrapper">
-        <div>Menu</div>
+        <nav className="nav">Menu</nav>
         <button className="header__button">Sign in</button>
       </div>
     </header>
