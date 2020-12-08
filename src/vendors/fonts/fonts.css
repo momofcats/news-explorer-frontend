@@ -33,3 +33,9 @@
     src: url('./sourcesanspro-regular.woff');
     font-weight: 400;
 }
+
+@font-face {
+    font-family: 'Roboto Slab';
+    src: url('./RobotoSlab-Bold.woff');
+    font-weight: 700;
+}
