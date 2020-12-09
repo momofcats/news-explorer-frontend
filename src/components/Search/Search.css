@@ -4,13 +4,43 @@
     flex-direction: column;
     margin: 0 auto;
     max-width: 608px;
-    padding: 0 104px;
+    justify-content: center;
   }
   
   .search__title {
       font-family: 'Roboto Slab',  Arial, Helvetica, sans-serif;
       font-weight: 400;
-      size: 60px;
-      line-height: 64px;
+      font-size: 60px;
+      line-height: 1.1;
       margin-top: 80px;
+      width: 100%;
   }
+
+  .search__subtitle {
+    margin: 32px 0 88px 0;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .search {
+        max-width: 448px;
+        padding: 0 40px;
+    }
+    .search__title {
+        font-size: 36px;
+        margin-top: 38px;
+    }
+    .search__subtitle {
+        margin: 16px 0 48px 0;
+      }
+}
+
+@media screen and (max-width: 320px) {
+    .search {
+        max-width: 285px;
+        padding: 0 16px;
+    }
+    .search__title {
+        margin-top: 30px;
+    }
+}
