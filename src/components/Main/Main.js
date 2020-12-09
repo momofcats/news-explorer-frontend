@@ -1,14 +1,14 @@
 import React from "react";
 import "./Main.css";
 import Header from "../Header/Header";
-import Search from '../Search/Search';
+import SearchForm from '../SearchForm/SearchForm';
 
 function Main() {
   return (
     <section className="main">
       <div className="main__overlay">
         <Header />
-        <Search />
+        <SearchForm />
       </div>
     </section>
   );
