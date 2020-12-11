@@ -17,29 +17,6 @@
     align-self: center;
 }
 
-.header__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-}
-
-.header__button {
-    -webkit-appearance: none;
-
-    border: 1px solid #FFF;
-    color: #fff;
-    box-sizing: border-box;
-    border-radius: 100px;
-    background-color: transparent;
-    width: 176px;
-    padding: 12px 0;
-    font-weight: 500;
-    margin-left: 42px;
-    font-family: inherit;
-    font-size: 18px;
-}
-
 @media screen and (max-width: 768px) {
     .header {
         padding: 0 40px;
