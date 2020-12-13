@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
   padding: 0px 104px;
   color: #fff;
   max-width: 1440px;
@@ -10,7 +10,7 @@
 
 .header__overlay {
   background-color: black;
-  opacity: 0.5;
+  opacity: .5;
   position: fixed;
   top: 0;
   left: 0;
@@ -71,7 +71,7 @@
   }
 
   .header__wrapper {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
     padding: 16px 40px;
     max-width: calc(100% - 2 * 40px);
   }
