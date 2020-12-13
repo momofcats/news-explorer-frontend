@@ -7,11 +7,25 @@
   max-width: 1440px;
   margin: 0 auto;
 }
+
+.header__overlay {
+  background-color: black;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
 .header__wrapper {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  z-index: 2;
 }
+
 .header__logo {
   font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -22,7 +36,6 @@
 }
 
 .header__button {
-  
   width: 24px;
   height: 24px;
   align-self: center;
@@ -31,29 +44,32 @@
   display: none;
 }
 
-.header_active {
-  background-color: #1a1b22;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-}
 .header__button_type_closed {
-    background-image: url("../../images/menu.svg");
+  background-image: url("../../images/menu.svg");
 }
 
 .header__button_type_expanded {
-    background-image: url('../../images/close-btn.svg');
+  background-image: url("../../images/close-btn.svg");
 }
 @media screen and (max-width: 768px) {
   .header {
     padding: 0 40px;
   }
 }
+
 @media screen and (max-width: 480px) {
   .header {
     padding: 0;
     flex-direction: column;
     border-bottom: none;
   }
+
+  .header_active {
+    background-color: #1a1b22;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
   .header__wrapper {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding: 16px 40px;
