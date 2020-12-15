@@ -1,0 +1,61 @@
+.card {
+  background: #FFF;
+  border-radius: 10px;
+  position: relative;
+  max-width: calc(100% - 2 * 104px);
+}
+
+.card__img {
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  padding-bottom: 100%;
+  background-size: cover;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  display: flex;
+  z-index: 1;
+}
+.card__keyword {
+    background: #FFF;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 8px 22px;
+    margin: 0;
+}
+.card__buttons-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+.card__button {
+  width: 40px;
+  height: 40px;
+  background: #FFF;
+  border-radius: 8px;
+  border-style: none;
+  cursor: pointer;
+}
+.card__button-bookmark_marked {
+    fill: #2F71E5;
+    stroke: #2F71E5;
+}
+.card__button-trash {
+    fill:#B6BCBF;
+}
+.card__button-bookmark {
+    stroke:#B6BCBF;
+    stroke-width:2;
+    fill: none;
+}
+.card__button-trash:hover {
+    fill:  #1A1B22;
+}
+.card__button-bookmark:hover {
+    fill:  #1A1B22;
+    stroke: #1A1B22;
+}
