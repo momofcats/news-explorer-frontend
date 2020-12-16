@@ -4,14 +4,13 @@ import './App.css';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import NewsCardsList from "../NewsCardList/NewsCardList";
-import Popup from '../Popup/Popup';
-
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 const App = () => {
     return (
         <>
         {/* <Main />
         <Footer /> */}
-        <Popup />
+        <InfoToolTip />
         </>
     )
 };

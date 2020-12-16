@@ -1,0 +1,11 @@
+.infoToolTip__text {
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.infoToolTip__btn {
+  border: none;
+  color: #2f71e5;
+  background: inherit;
+  text-align: left;
+}
