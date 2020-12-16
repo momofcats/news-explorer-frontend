@@ -4,14 +4,17 @@ import trash from "../../images/trash.svg";
 import bookmark from "../../images/bookmark.svg";
 
 function NewsCard(props) {
+    const article = props.article;
   return (
     <li className="card">
-      <div
+      <img
         className="card__img"
-        style={{ backgroundImage: `url(${props.image})` }}
-      >
+        src={article.image}
+        alt="article"
+      />
+      {props.isLoggedIn ? (
         <div className="card__buttons-wrapper">
-          <p className="card__keyword">{props.keyword}</p>
+          <p className="card__keyword">{article.keyword}</p>
           <button type="button" className="card__button">
             <svg
               className="card__button-trash"
@@ -27,6 +30,7 @@ function NewsCard(props) {
             </svg>
           </button>
         </div>
+      ) : (
         <button type="button" className="card__button">
           <svg
             className="card__button-bookmark"
@@ -34,17 +38,15 @@ function NewsCard(props) {
             height="24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path
-              d="M11.382 15.714L6 19.942V4h12v15.942l-5.382-4.228-.618-.486-.618.486z"
-            />
+            <path d="M11.382 15.714L6 19.942V4h12v15.942l-5.382-4.228-.618-.486-.618.486z" />
           </svg>
         </button>
-      </div>
+      )}
       <div className="card__description-wrapper">
-        <p className="card__date">{props.date}</p>
-        <h2 className="card__title">{props.title}</h2>
-        <p className="card__text">{props.text}</p>
-        <p className="card__source">{props.source}</p>
+        <p className="card__date">{article.date}</p>
+        <h2 className="card__title">{article.title}</h2>
+        <p className="card__text">{article.text}</p>
+        <p className="card__source">{article.source}</p>
       </div>
     </li>
   );
