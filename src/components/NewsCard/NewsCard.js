@@ -1,7 +1,5 @@
 import React from "react";
 import "./NewsCard.css";
-import trash from "../../images/trash.svg";
-import bookmark from "../../images/bookmark.svg";
 
 function NewsCard(props) {
     const article = props.article;
