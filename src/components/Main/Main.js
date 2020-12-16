@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import SavedNews from '../SavedNews/SavedNews';
+import NewsCardsList from "../NewsCardList/NewsCardList";
 
 
 function Main() {
@@ -19,6 +20,7 @@ function Main() {
       </section>
       <About />
       <SavedNews />
+      <NewsCardsList />
       
     </>
   );
