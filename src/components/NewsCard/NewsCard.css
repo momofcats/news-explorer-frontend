@@ -67,9 +67,9 @@
   fill: #1a1b22;
 }
 .card__button-bookmark:hover {
-  fill: #1a1b22;
   stroke: #1a1b22;
 }
+
 .card__description-wrapper {
     width: calc(100% - 2 * 24px);
     margin: 0 auto;
