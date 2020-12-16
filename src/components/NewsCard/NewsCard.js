@@ -10,9 +10,10 @@ function NewsCard(props) {
         src={article.image}
         alt="article"
       />
-      {props.isLoggedIn ? (
         <div className="card__buttons-wrapper">
-          <p className="card__keyword">{article.keyword}</p>
+            {props.children}
+            </div>
+          {/* <p className="card__keyword">{article.keyword}</p>
           <button type="button" className="card__button">
             <svg
               className="card__button-trash"
@@ -27,7 +28,6 @@ function NewsCard(props) {
               />
             </svg>
           </button>
-        </div>
       ) : (
         <button type="button" className="card__button">
           <svg
@@ -39,7 +39,7 @@ function NewsCard(props) {
             <path d="M11.382 15.714L6 19.942V4h12v15.942l-5.382-4.228-.618-.486-.618.486z" />
           </svg>
         </button>
-      )}
+      )} */}
       <div className="card__description-wrapper">
         <p className="card__date">{article.date}</p>
         <h2 className="card__title">{article.title}</h2>
