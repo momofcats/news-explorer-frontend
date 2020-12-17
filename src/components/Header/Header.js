@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
 import Nav from "../Nav/Nav";
-function Header() {
+function Header(props) {
   const [expanded, setExpanded] = useState(false);
   function handleClick() {
     expanded ? setExpanded(false) : setExpanded(true);
@@ -19,7 +19,7 @@ function Header() {
           onClick={handleClick}
         ></button>
       </div>
-      <Nav isOpen={expanded} />
+      <Nav isOpen={expanded} onClick={props.onClick}/>
       <div className={`${expanded ? "header__overlay" : ""}`}></div>
     </header>
   );

@@ -4,7 +4,7 @@ import Popup from "../Popup/Popup";
 
 function SignInPopup(props) {
   return (
-    <Popup>
+    <Popup onClose={props.onClose} isOpen={props.isOpen}>
       <form className="form">
         <h2 className="form__title">Sign in</h2>
         <label className="form__input-label" for="email">
@@ -33,7 +33,7 @@ function SignInPopup(props) {
       </form>
       <div className="form__wrapper">
         <p>or</p>
-        <button className="button-link" type="button">
+        <button className="button-link" type="button" onClick={props.onSignUpClick}>
           Sign up
         </button>
       </div>

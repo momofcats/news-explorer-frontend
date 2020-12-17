@@ -9,9 +9,9 @@ function Nav(props) {
         Home
       </NavLink>
 
-      <NavLink className="nav__item nav__item_type_button" to="/signin">
+      <button className="nav__item nav__item_type_button" onClick={props.onClick}>
         Sign in
-      </NavLink>
+      </button>
     </nav>
   );
 }

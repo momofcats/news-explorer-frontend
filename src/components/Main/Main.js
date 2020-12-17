@@ -8,20 +8,20 @@ import NewsCardsList from '../NewsCardList/NewsCardList';
 
 
 
-function Main() {
+function Main(props) {
  
   
   return (
     <>
       <section className="main">
         <div className="main__overlay">
-          <Header />
+          <Header onClick={props.onClick}/>
           <SearchForm />
         </div>
       </section>
       {/* <About />
       <SavedNews /> */}
-      <NewsCardsList />
+      
     </>
   );
 }
