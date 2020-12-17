@@ -51,6 +51,8 @@
     display: flex;
     justify-content: center;
     font-size: 14px;
+    line-height: 1.5;
+    width: 100%;
     
 }
 .form__btn-redirect {
@@ -61,4 +63,12 @@
   display: inline-block;
   cursor: pointer;
   display: inline;
+}
+
+.form__btn-submit:hover {
+    background: #347EFF;
+}
+
+.form__btn-submit:active{
+    background: #2A65CC;
 }

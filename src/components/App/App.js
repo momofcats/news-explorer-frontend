@@ -5,13 +5,13 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import NewsCardsList from "../NewsCardList/NewsCardList";
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
+
 const App = () => {
     return (
         <>
         {/* <Main />
         <Footer /> */}
-        <PopupWithForm />
+        <SignInPopup />
         </>
     )
 };
