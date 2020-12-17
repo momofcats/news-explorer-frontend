@@ -9,7 +9,7 @@ function InfoToolTip() {
         <p className="infoToolTip__text">
           Registration successfully completed!
         </p>
-        <button className="infoToolTip__btn" type="button">
+        <button className="button-link" type="button">
           Sign in
         </button>
       </Popup>

@@ -1,12 +1,11 @@
 import React from "react";
-import "./SignInPopup.css";
 import Popup from "../Popup/Popup";
 
-function SignInPopup(props) {
+function SignUpPopup(props) {
   return (
     <Popup>
       <form className="form">
-        <h2 className="form__title">Sign in</h2>
+        <h2 className="form__title">Sign up</h2>
         <label className="form__input-label" for="email">
           Email
         </label>
@@ -27,18 +26,28 @@ function SignInPopup(props) {
           placeholder="Enter password"
         />
         <span className="form__input-error">Some error</span>
+        <label className="form__input-label" for="username">
+          Username
+        </label>
+        <input
+          id="username"
+          className="form__input"
+          type="text"
+          placeholder="Enter your username"
+        />
+        <span className="form__input-error">Some error</span>
         <button className="button button_type_primary" type="submit">
-          Sign in
+          Sign up
         </button>
       </form>
       <div className="form__wrapper">
         <p>or</p>
         <button className="button-link" type="button">
-          Sign up
+          Sign in
         </button>
       </div>
     </Popup>
   );
 }
 
-export default SignInPopup;
+export default SignUpPopup;

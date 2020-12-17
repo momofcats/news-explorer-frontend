@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 .newsCardList__btn:hover {
-    background:rgba(255, 255, 255, 0.9);
+    background:rgba(255, 255, 255, .1);
 }
 
 @media screen and (max-width: 900px) {

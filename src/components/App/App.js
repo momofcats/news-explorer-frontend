@@ -6,13 +6,13 @@ import Footer from '../Footer/Footer';
 import NewsCardsList from "../NewsCardList/NewsCardList";
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import SignInPopup from '../SignInPopup/SignInPopup';
+import SignUpPopup from '../SignUpPopup/SignUpPopup';
 
 const App = () => {
     return (
         <>
-        {/* <Main />
-        <Footer /> */}
-        <SignInPopup />
+        <Main />
+        {/* <Footer />  */}
         </>
     )
 };
