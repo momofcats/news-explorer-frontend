@@ -9,6 +9,7 @@ import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import NotFound from '../NotFound/NotFound';
 import Preloader from '../Preloader/Preloader';
+import SavedArticles from '../SavedArticles/SavedArticles';
 
 
 const App = () => {
@@ -49,10 +50,11 @@ const App = () => {
 
     return (
         <>
+        <SavedArticles />
         {/* <Main onClick={handleSignInClick}/>
         <NewsCardsList /> */}
         {/* <NotFound /> */}
-        <Preloader />
+        {/* <Preloader /> */}
         {/* <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
         <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/>

@@ -1,0 +1,24 @@
+.savedArticles {
+  padding: 40px 104px;
+  background: #fff;
+  color: #1a1b22;
+  font-size: 18px;
+  line-height: 1.3;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+.savedArticles__title {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.3;
+  color: rgba(26, 27, 34, 0.5);
+}
+
+.savedArticles__text {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+  font-size: 40px;
+}
+
+.savedArticles__accent {
+  font-weight: 700;
+}
