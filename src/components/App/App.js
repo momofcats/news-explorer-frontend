@@ -8,6 +8,7 @@ import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
 import NotFound from '../NotFound/NotFound';
+import Preloader from '../Preloader/Preloader';
 
 
 const App = () => {
@@ -48,13 +49,14 @@ const App = () => {
 
     return (
         <>
-        <Main onClick={handleSignInClick}/>
-        <NewsCardsList />
-        <NotFound />
-        <Footer />
+        {/* <Main onClick={handleSignInClick}/>
+        <NewsCardsList /> */}
+        {/* <NotFound /> */}
+        <Preloader />
+        {/* <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
         <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/>
-        <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} />
+        <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} /> */}
         </>
     )
 };
