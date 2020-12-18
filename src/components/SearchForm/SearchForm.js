@@ -11,7 +11,7 @@ function SearchForm() {
       </p>
       <div className="searchForm__input-wrapper">
         <input className="searchForm__input" placeholder="Enter topic"/>
-        <button className="button button_type_primary searchForm__button">Search</button>
+        <button className="searchForm__button button button_type_primary">Search</button>
       </div>
     </form>
   );

@@ -7,6 +7,7 @@ import NewsCardsList from "../NewsCardList/NewsCardList";
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
+import NotFound from '../NotFound/NotFound';
 
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
         <>
         <Main onClick={handleSignInClick}/>
         <NewsCardsList />
+        <NotFound />
         <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
         <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/>
