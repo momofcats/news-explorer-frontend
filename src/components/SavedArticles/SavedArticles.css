@@ -22,3 +22,24 @@
 .savedArticles__accent {
   font-weight: 700;
 }
+
+@media screen and (max-width: 768px) {
+    .savedArticles {
+        padding: 40px;
+      }
+    .savedArticles__title {
+        font-size: 14px;
+    }
+    .savedArticles__text {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .savedArticles {
+        padding: 32px 16px;
+      }
+    .savedArticles__title {
+        font-size: 12px;
+    }
+}
