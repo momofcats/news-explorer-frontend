@@ -7,7 +7,7 @@ function SignInPopup(props) {
     <Popup onClose={props.onClose} isOpen={props.isOpen}>
       <form className="form">
         <h2 className="form__title">Sign in</h2>
-        <label className="form__input-label" for="email">
+        <label className="form__input-label" htmlFor="email">
           Email
         </label>
         <input
@@ -17,7 +17,7 @@ function SignInPopup(props) {
           placeholder="Enter email"
         />
         <span className="form__input-error">Some error</span>
-        <label className="form__input-label" for="password">
+        <label className="form__input-label" htmlFor="password">
           Password
         </label>
         <input
