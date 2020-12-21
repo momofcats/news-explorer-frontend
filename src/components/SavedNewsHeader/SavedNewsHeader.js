@@ -9,12 +9,13 @@ function SavedNewsHeader(props) {
     expanded ? setExpanded(false) : setExpanded(true);
   }
   return (
+    
     <header
       className={`header header_theme_light ${
         expanded ? "header_active-light" : ""
       }`}
     >
-      <div className="header__wrapper">
+      <div className="header__wrapper header__wrapper_light">
         <div className="header__logo">NewsExplorer</div>
         <button
           className={`header__button ${
@@ -25,8 +26,8 @@ function SavedNewsHeader(props) {
           onClick={handleClick}
         ></button>
       </div>
-      <Nav isOpen={expanded} onClick={props.onClick} isLoggedIn={true}></Nav>
-      <div className={`${expanded ? "header__overlay" : ""}`}></div>
+      <Nav isOpen={expanded} onClick={props.onClick} isLoggedIn={true} />
+      {expanded && <div className="header__overlay"></div>}
     </header>
   );
 }

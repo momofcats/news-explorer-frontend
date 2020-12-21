@@ -53,7 +53,7 @@ const App = () => {
     return (
         <>
         <SavedNewsHeader onClick={handleSignInClick} />
-        {/* <Header onClick={handleSignInClick}/> */}
+        <Header onClick={handleSignInClick}/>
         {/* <SavedArticles /> */}
         {/* <Main onClick={handleSignInClick}/>
         <NewsCardsList /> */}

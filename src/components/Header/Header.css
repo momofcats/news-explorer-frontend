@@ -7,7 +7,6 @@
   max-width: 1440px;
   margin: 0 auto;
   background-color: black;
-  z-index: 2;
 }
 
 .header_theme_light {
@@ -32,6 +31,7 @@
   justify-content: space-between;
   z-index: 2;
   flex: initial;
+  background-color: inherit;
 }
 
 .header__logo {
@@ -85,15 +85,19 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
   }
+
   .header_active-light {
     background-color: #FFF;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
   }
+
   .header__wrapper {
     border-bottom: 1px solid rgba(255, 255, 255, .2);
     padding: 16px 40px;
     max-width: calc(100% - 2 * 40px);
+  }
+  .header__wrapper_light {
+    border-bottom: 1px solid #B6BCBF;
+
   }
   .header__button {
     padding: 0;

@@ -21,7 +21,7 @@ function Header(props) {
       </div>
       <Nav isOpen={expanded} onClick={props.onClick} isLoggedIn={false}/>
       
-      <div className={`${expanded ? "header__overlay" : ""}`}></div>
+      {expanded && <div className="header__overlay"></div>}
     </header>
   );
 }
