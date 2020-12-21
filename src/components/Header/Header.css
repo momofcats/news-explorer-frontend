@@ -6,6 +6,14 @@
   color: #fff;
   max-width: 1440px;
   margin: 0 auto;
+  background-color: black;
+  z-index: 2;
+}
+
+.header_theme_light {
+  background: #FFF;
+  color: #1A1B22;
+  border-bottom: 1px solid #B6BCBF;
 }
 
 .header__overlay {
@@ -21,9 +29,9 @@
 
 .header__wrapper {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   z-index: 2;
+  flex: initial;
 }
 
 .header__logo {
@@ -42,8 +50,16 @@
   background-color: transparent;
   border-style: none;
   display: none;
+  cursor: pointer;
 }
 
+.header__button-dark_type_closed {
+  background-image: url("../../images/menu-dark.svg");
+}
+
+.header__button-dark_type_expanded {
+  background-image: url("../../images/close-btn-dark.svg");
+}
 .header__button_type_closed {
   background-image: url("../../images/menu.svg");
 }
@@ -69,7 +85,11 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
   }
-
+  .header_active-light {
+    background-color: #FFF;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
   .header__wrapper {
     border-bottom: 1px solid rgba(255, 255, 255, .2);
     padding: 16px 40px;
