@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 import "../Header/Header.css";
 import "./SavedNewsHeader.css";
 
-function SavedNewsHeader({ onSignIn,menuButtonVisible }) {
+function SavedNewsHeader({ onSignIn,menuButtonVisible,isLoggedIn }) {
   const [expanded, setExpanded] = useState(false);
   function toggleMenu() {
     expanded ? setExpanded(false) : setExpanded(true);
@@ -31,7 +31,7 @@ function SavedNewsHeader({ onSignIn,menuButtonVisible }) {
           onClick={toggleMenu}
         ></button>}
       </div>
-      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={true} />
+      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={isLoggedIn} />
       {expanded && <div className="header__overlay"></div>}
     </header>
   );

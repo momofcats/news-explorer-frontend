@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import "./Header.css";
 import Nav from "../Nav/Nav";
-function Header({ onSignIn,menuButtonVisible }) {
+function Header({ onSignIn,menuButtonVisible, isLoggedIn }) {
   const [expanded, setExpanded] = useState(false);
   
   function toggleMenu() {
@@ -24,7 +24,7 @@ function Header({ onSignIn,menuButtonVisible }) {
           onClick={toggleMenu}
         ></button>}
       </div>
-      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={false}/>
+      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={isLoggedIn}/>
       
       {expanded && <div className="header__overlay"></div>}
     </header>

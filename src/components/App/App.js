@@ -4,19 +4,12 @@ import './App.css';
 import Main from '../Main/Main';
 import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
 import Footer from '../Footer/Footer';
-import NewsCardsList from "../NewsCardList/NewsCardList";
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import SignInPopup from '../SignInPopup/SignInPopup';
 import SignUpPopup from '../SignUpPopup/SignUpPopup';
-import NotFound from '../NotFound/NotFound';
-import Preloader from '../Preloader/Preloader';
-import SavedArticles from '../SavedArticles/SavedArticles';
-import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
-import Header from '../Header/Header';
-import SavedNews from "../SavedNews/SavedNews";
-
 
 const App = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
     const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
     const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
@@ -57,14 +50,8 @@ const App = () => {
 
     return (
         <>
-        {/* <SavedNewsHeader onClick={handleSignInClick} /> */}
-        {/* <SavedArticles />
-        <SavedNews /> */}
-        {/* <Main onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} /> */}
-        <SavedNewsPage onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible}/>
-        {/* <NewsCardsList />  */}
-        {/* <NotFound /> */}
-        {/* <Preloader /> */}
+        <Main onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} isLoggedIn={isLoggedIn}/>
+        <SavedNewsPage onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} isLoggedIn={()=> setIsLoggedIn(true)}/>
         <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
         <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/> 
