@@ -32,14 +32,15 @@
   .searchForm__input {
       border: none;
       flex-grow: 2;
-      outline: none;
       background-color: #FFF;
       color: #1A1B22;
       padding-left: 24px;
       font-size: 16px;
       border-radius: 100px;
   }
-
+.searchForm__input:focus {
+    outline: 2px solid #347EFF;
+}
   .searchForm__button {
     width: 168px;
     margin-top: 0;

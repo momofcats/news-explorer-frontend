@@ -27,6 +27,9 @@
 .button_type_primary:active{
     background: #2A65CC;
 }
+.button_type_primary:focus {
+    outline: 2px solid #347EFF;
+}
 
 .button-link:hover {
 color: #347EFF;
