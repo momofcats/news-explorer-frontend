@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./Header.css";
 import Nav from "../Nav/Nav";
-function Header(props) {
+function Header({ onSignIn,menuButtonVisible }) {
   const [expanded, setExpanded] = useState(false);
-  function handleClick() {
+  
+  function toggleMenu() {
     expanded ? setExpanded(false) : setExpanded(true);
   }
+  const handleSignIn = useCallback(() => {
+    setExpanded(false); 
+    onSignIn();
+  }, [onSignIn]);
   return (
     <header className={`header ${expanded ? "header_active" : ""}`}>
       <div className="header__wrapper">
         <div className="header__logo">NewsExplorer</div>
-        <button
+        {menuButtonVisible && <button
           className={`header__button ${
             expanded
               ? "header__button_type_expanded"
               : "header__button_type_closed"
           }`}
-          onClick={handleClick}
-        ></button>
+          onClick={toggleMenu}
+        ></button>}
       </div>
-      <Nav isOpen={expanded} onClick={props.onClick} isLoggedIn={false}/>
+      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={false}/>
       
       {expanded && <div className="header__overlay"></div>}
     </header>

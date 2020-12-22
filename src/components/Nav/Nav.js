@@ -25,14 +25,14 @@ function Nav(props) {
       {!props.isLoggedIn ? (
         <button
           className="nav__button nav__button_type_sign-in"
-          onClick={props.onClick}
+          onClick={props.onSignIn}
         >
           Sign in
         </button>
       ) : (
         <button
           className="nav__button nav__button_type_sign-out"
-          onClick={props.onClick}
+          onClick={props.onSignUp}
         >
           Elise<img className="nav__icon" src={logout} alt="icon"/>
         </button>

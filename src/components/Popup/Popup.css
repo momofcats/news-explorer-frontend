@@ -17,6 +17,7 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  z-index: 3;
 }
 
 .popup__container {
@@ -33,6 +34,7 @@
   border-radius: 16px;
   max-width: 430px;
   width: calc(100% - 2* 36px);
+  
 }
 
 .popup__btn {

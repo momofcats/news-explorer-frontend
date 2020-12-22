@@ -17,12 +17,14 @@ import SavedNews from "../SavedNews/SavedNews";
 
 const App = () => {
     const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
-    const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(true);
+    const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
     const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
+    const [isMenuButtonVisible, setIsMenuButtonVisible] = useState(true);
     function closeAllPopups() {
         setIsInfoToolTipPopupOpen(false);
         setIsSignInPopupOpen(false);
         setIsSignUpPopupOpen(false);
+        setIsMenuButtonVisible(true);
     }
     function handleSignUpSuccess() {
         setIsInfoToolTipPopupOpen(true);
@@ -34,6 +36,7 @@ const App = () => {
     }
 
     function handleSignInClick() {
+        setIsMenuButtonVisible(false);
         setIsSignUpPopupOpen(false);
         setIsSignInPopupOpen(true);
     }
@@ -56,14 +59,14 @@ const App = () => {
         {/* <SavedNewsHeader onClick={handleSignInClick} /> */}
         {/* <SavedArticles />
         <SavedNews /> */}
-        <Main onClick={handleSignInClick}/>
+        <Main onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} />
         {/* <NewsCardsList />  */}
         {/* <NotFound /> */}
         {/* <Preloader /> */}
-        {/* <Footer /> */}
+        <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
-        {/* <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/> */}
-        {/* <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} />  */}
+        <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/> 
+        <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} /> 
         </>
     )
 };
