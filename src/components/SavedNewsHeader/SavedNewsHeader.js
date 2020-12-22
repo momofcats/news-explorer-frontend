@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Nav from "../Nav/Nav";
 import "../Header/Header.css";
 import "./SavedNewsHeader.css";
 
-function SavedNewsHeader(props) {
+function SavedNewsHeader({ onSignIn,menuButtonVisible }) {
   const [expanded, setExpanded] = useState(false);
-  function handleClick() {
+  function toggleMenu() {
     expanded ? setExpanded(false) : setExpanded(true);
   }
+
+  const handleSignIn = useCallback(() => {
+    setExpanded(false); 
+    onSignIn();
+  }, [onSignIn]);
   return (
     
     <header
@@ -17,16 +22,16 @@ function SavedNewsHeader(props) {
     >
       <div className="header__wrapper header__wrapper_light">
         <div className="header__logo">NewsExplorer</div>
-        <button
+        {menuButtonVisible && <button
           className={`header__button ${
             expanded
               ? "header__button-dark_type_expanded"
               : "header__button-dark_type_closed"
           }`}
-          onClick={handleClick}
-        ></button>
+          onClick={toggleMenu}
+        ></button>}
       </div>
-      <Nav isOpen={expanded} onClick={props.onClick} isLoggedIn={true} />
+      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={true} />
       {expanded && <div className="header__overlay"></div>}
     </header>
   );

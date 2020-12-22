@@ -32,7 +32,7 @@ function Nav(props) {
       ) : (
         <button
           className="nav__button nav__button_type_sign-out"
-          onClick={props.onSignUp}
+          onClick={props.onSignIn}
         >
           Elise<img className="nav__icon" src={logout} alt="icon"/>
         </button>

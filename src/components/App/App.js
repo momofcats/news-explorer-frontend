@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import './App.css';
 import Main from '../Main/Main';
+import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
 import Footer from '../Footer/Footer';
 import NewsCardsList from "../NewsCardList/NewsCardList";
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
@@ -59,7 +60,8 @@ const App = () => {
         {/* <SavedNewsHeader onClick={handleSignInClick} /> */}
         {/* <SavedArticles />
         <SavedNews /> */}
-        <Main onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} />
+        {/* <Main onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible} /> */}
+        <SavedNewsPage onSignIn={handleSignInClick} menuButtonVisible={isMenuButtonVisible}/>
         {/* <NewsCardsList />  */}
         {/* <NotFound /> */}
         {/* <Preloader /> */}
