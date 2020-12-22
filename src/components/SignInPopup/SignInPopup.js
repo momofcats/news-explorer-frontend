@@ -15,6 +15,7 @@ function SignInPopup(props) {
           className="form__input"
           type="email"
           placeholder="Enter email"
+          required
         />
         <span className="form__input-error">Some error</span>
         <label className="form__input-label" htmlFor="password">
@@ -25,6 +26,7 @@ function SignInPopup(props) {
           className="form__input"
           type="password"
           placeholder="Enter password"
+          required
         />
         <span className="form__input-error">Some error</span>
         <button className="button button_type_primary" type="submit">
