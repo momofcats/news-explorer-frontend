@@ -17,12 +17,15 @@
   height: 60%;
   border-bottom: 3px solid transparent;
 }
+
 .nav__link_active-light {
   border-bottom: 3px solid #fff;
 }
+
 .nav__link_active-dark {
   border-bottom: 3px solid #1a1b22;
 }
+
 .nav__button {
   cursor: pointer;
   border-radius: 100px;
@@ -36,6 +39,7 @@
   height: 48px;
   margin-left: 20px;
 }
+
 .nav__button_type_sign-in {
   border: 1px solid #fff;
   color: #fff;
@@ -48,22 +52,27 @@
   justify-content: center;
   align-content: center;
 }
+
 .nav__icon {
   align-self: center;
   margin-left: 20px;
 }
+
 @media screen and (max-width: 768px) {
   .nav {
     height: 66px;
   }
+
   .nav__link {
     font-size: 16px;
   }
+
   .nav__button {
     height: 40px;
     font-size: 16px;
     padding: 10px;
   }
+
   .nav__button_type_sign-in {
     width: 152px;
   }
@@ -74,6 +83,7 @@
     font-size: 14px;
     margin-left: 15px;
   }
+
   .nav__button {
     margin-left: 15px;
     font-size: 14px;
@@ -84,6 +94,7 @@
   .nav {
     display: none;
   }
+
   .nav_active {
     display: flex;
     flex-direction: column;
@@ -92,22 +103,26 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
   }
+
   .nav__link {
     border-bottom: none;
     align-self: flex-start;
     font-size: 18px;
     margin: 40px 0 0 40px;
   }
+
   .nav__button {
     margin: 40px 0;
     padding: 16px;
     font-size: 18px;
     height: 56px;
   }
+
   .nav__button_type_sign-in {
     width: calc(100% - 2 * 40px);
    
   }
+
   .nav__button_type_sign-out {
     width: min-content;
     align-self: flex-start;
@@ -120,9 +135,11 @@
     padding: 0 16px;
     max-width: calc(100% - 2 * 16px);
   }
+
   .nav__link {
     margin-left: 0;
   }
+  
   .nav__button_type_sign-in {
     width: 288px;
     

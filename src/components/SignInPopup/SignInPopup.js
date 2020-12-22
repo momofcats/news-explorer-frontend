@@ -1,5 +1,4 @@
 import React from "react";
-import "./SignInPopup.css";
 import Popup from "../Popup/Popup";
 
 function SignInPopup(props) {
@@ -35,7 +34,11 @@ function SignInPopup(props) {
       </form>
       <div className="form__wrapper">
         <p>or</p>
-        <button className="button-link" type="button" onClick={props.onSignUpClick}>
+        <button
+          className="button-link"
+          type="button"
+          onClick={props.onSignUpClick}
+        >
           Sign up
         </button>
       </div>

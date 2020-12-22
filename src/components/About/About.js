@@ -14,7 +14,7 @@ function About() {
           is comprised of Node.js and MingoDB(back-end), HTML5/CSS/JavaScript
           and React.js(front-end).
         </p>
-        <p className="about__text" >
+        <p className="about__text">
           I recieved my training trought Ptacticum by Yandex. The course taught
           me the fundamentals of JavaScript, html and CSS. Further into the
           couse I was exposed to React.js ans Node.js. My experience was great.

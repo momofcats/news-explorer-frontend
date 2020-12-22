@@ -15,7 +15,10 @@ function Footer() {
           <NavLink className="footer__link" to="/">
             Home
           </NavLink>
-          <a className="footer__link footer__link_type_nav" href="https://practicum.yandex.com/">
+          <a
+            className="footer__link footer__link_type_nav"
+            href="https://practicum.yandex.com/"
+          >
             Practicum by Yandex
           </a>
         </div>
@@ -23,7 +26,10 @@ function Footer() {
           <a href="https://github.com" className="footer__link">
             <img alt="github icon" src={githubIcon} />
           </a>
-          <a href="https://www.facebook.com" className="footer__link footer__link_type_social">
+          <a
+            href="https://www.facebook.com"
+            className="footer__link footer__link_type_social"
+          >
             <img alt="facebook icon" src={facebookIcon} />
           </a>
         </div>

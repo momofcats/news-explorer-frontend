@@ -47,7 +47,11 @@ function SignUpPopup(props) {
       </form>
       <div className="form__wrapper">
         <p>or</p>
-        <button className="button-link" type="button" onClick={props.onSignInClick}>
+        <button
+          className="button-link"
+          type="button"
+          onClick={props.onSignInClick}
+        >
           Sign in
         </button>
       </div>

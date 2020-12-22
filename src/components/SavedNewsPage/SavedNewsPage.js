@@ -6,7 +6,11 @@ import SavedArticles from "../SavedArticles/SavedArticles";
 function SavedNewsPage(props) {
   return (
     <>
-      <SavedNewsHeader onSignIn={props.onSignIn} menuButtonVisible={props.menuButtonVisible} isLoggedIn={props.isLoggedIn} />
+      <SavedNewsHeader
+        onSignIn={props.onSignIn}
+        menuButtonVisible={props.menuButtonVisible}
+        isLoggedIn={props.isLoggedIn}
+      />
       <SavedArticles />
       <SavedNews />
     </>

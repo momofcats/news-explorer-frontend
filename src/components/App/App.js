@@ -51,7 +51,7 @@ const App = () => {
   return (
     <>
       <Switch>
-        <Route path="/saved-news" exact> 
+        <Route path="/saved-news" exact>
           <SavedNewsPage
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}

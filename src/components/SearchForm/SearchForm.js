@@ -10,8 +10,10 @@ function SearchForm() {
         account.
       </p>
       <div className="searchForm__input-wrapper">
-        <input className="searchForm__input" placeholder="Enter topic"/>
-        <button className="searchForm__button button button_type_primary">Search</button>
+        <input className="searchForm__input" placeholder="Enter topic" />
+        <button className="searchForm__button button button_type_primary">
+          Search
+        </button>
       </div>
     </form>
   );

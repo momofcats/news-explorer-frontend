@@ -3,7 +3,7 @@
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, .2);
   padding: 0px 104px;
-  color: #fff;
+  color: #FFF;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -35,6 +35,7 @@
 .header__wrapper_light {
   background: #FFF;
 }
+
 .header__logo {
   font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -61,6 +62,7 @@
 .header__button-dark_type_expanded {
   background-image: url("../../images/close-btn-dark.svg");
 }
+
 .header__button_type_closed {
   background-image: url("../../images/menu.svg");
 }
@@ -68,6 +70,7 @@
 .header__button_type_expanded {
   background-image: url("../../images/close-btn.svg");
 }
+
 @media screen and (max-width: 768px) {
   .header {
     padding: 0 40px;
@@ -88,7 +91,7 @@
   }
 
   .header_active-light {
-    background-color: #FFF;
+    background-color: #fff;
   }
 
   .header__wrapper {
@@ -96,10 +99,11 @@
     padding: 16px 40px;
     max-width: calc(100% - 2 * 40px);
   }
-  .header__wrapper_light {
-    border-bottom: 1px solid #B6BCBF;
 
+  .header__wrapper_light {
+    border-bottom: 1px solid #b6bcbf;
   }
+
   .header__button {
     padding: 0;
     display: block;
@@ -111,6 +115,7 @@
     padding: 16px;
     max-width: calc(100% - 2 * 16px);
   }
+  
   .header__logo {
     font-size: 16px;
   }
