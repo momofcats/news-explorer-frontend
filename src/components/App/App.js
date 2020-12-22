@@ -12,6 +12,7 @@ import Preloader from '../Preloader/Preloader';
 import SavedArticles from '../SavedArticles/SavedArticles';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import Header from '../Header/Header';
+import SavedNews from "../SavedNews/SavedNews";
 
 
 const App = () => {
@@ -52,17 +53,18 @@ const App = () => {
 
     return (
         <>
-        <SavedNewsHeader onClick={handleSignInClick} />
+        {/* <SavedNewsHeader onClick={handleSignInClick} /> */}
         <Header onClick={handleSignInClick}/>
-        {/* <SavedArticles /> */}
+        <SavedArticles />
+        <SavedNews />
         {/* <Main onClick={handleSignInClick}/>
         <NewsCardsList /> */}
         {/* <NotFound /> */}
         {/* <Preloader /> */}
-        {/* <Footer />
+        <Footer />
         <SignInPopup onClose={closeAllPopups} isOpen={isSignInPopUpOpen} onSignUpClick={handleSignUpClick}/>
         <SignUpPopup onClose={closeAllPopups} isOpen={isSignUpPopupOpen} onSignInClick={handleSignInClick}/>
-        <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} /> */}
+        <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} /> 
         </>
     )
 };
