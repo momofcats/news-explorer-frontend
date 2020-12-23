@@ -44,8 +44,8 @@ function SavedNews() {
   ];
   return (
     <ul className="savedNews">
-      {articles.map((article) => (
-        <NewsCard article={article}>
+      {articles.map((article, id) => (
+        <NewsCard article={article} key={id}>
           <div className="card__buttons-wrapper card__buttons-wrapper_placement_spaceout">
             <p className="card__keyword">{article.keyword}</p>
             <button type="button" className="card__button">

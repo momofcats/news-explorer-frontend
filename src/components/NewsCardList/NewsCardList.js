@@ -37,8 +37,8 @@ function NewsCardsList() {
     <section className="newsCardList">
       <h3 className="newsCardList__title">Search results</h3>
       <ul className="newsCardList__gallery">
-        {articles.map((article) => (
-          <NewsCard article={article}>
+        {articles.map((article, id) => (
+          <NewsCard article={article} key={id}>
             <div className="card__buttons-wrapper card__buttons-wrapper_placement_right">
               <button type="button" className="card__button">
                 <svg
