@@ -25,7 +25,8 @@
 }
 
 .newsCardList__btn {
-  background: rgba(255, 255, 255, 1);
+  background: #FFF;
+  opacity: 1;
   border-radius: 80px;
   color: #1a1b22;
   width: 288px;
@@ -35,7 +36,7 @@
 }
 
 .newsCardList__btn:hover {
-  background: rgba(255, 255, 255, .1);
+  opacity: .9;
 }
 
 @media screen and (max-width: 900px) {

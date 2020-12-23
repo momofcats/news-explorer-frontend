@@ -48,11 +48,6 @@
   margin-top: 0;
 }
 
-.searchForm__button:hover {
-  cursor: pointer;
-  background: #2a65cc;
-}
-
 @media screen and (max-width: 768px) {
   .searchForm {
     max-width: 448px;
