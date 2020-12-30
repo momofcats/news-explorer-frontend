@@ -22,7 +22,7 @@ function SearchForm(props) {
         account.
       </p>
       <div className="searchForm__input-wrapper">
-        <input className="searchForm__input" placeholder="Enter topic" onChange={(e) => setKeyword(e.target.value)}/>
+        <input className="searchForm__input" placeholder="Enter topic" onChange={(e) => setKeyword(e.target.value)} value={keyword}/>
         <button
           type="submit"
           className="searchForm__button button button_type_primary"

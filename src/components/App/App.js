@@ -9,12 +9,16 @@ import SignInPopup from "../SignInPopup/SignInPopup";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
 import newsApi from "../../utils/NewsApi";
 
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
   const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
   const [isMenuButtonVisible, setIsMenuButtonVisible] = useState(true);
+  const [articles, setArticles] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
 
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
@@ -23,10 +27,15 @@ const App = () => {
     setIsMenuButtonVisible(true);
   }
   function handleNewsSearch(keyword) {
+    setIsloading(true);
     newsApi
       .searchNews(keyword)
-      .then((articles) => {
+      .then((res) => {
+        setArticles(res.articles);
+        localStorage.setItem("storedArticles", JSON.stringify(articles));
         console.log(articles);
+        setIsloading(false);
+        setIsSearching(true);
       })
       .catch((err) => {
         console.log(err);
@@ -76,6 +85,9 @@ const App = () => {
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}
             isLoggedIn={false}
+            articles={articles}
+            isSearching={isSearching}
+            isLoading={isLoading}
           />
         </Route>
       </Switch>

@@ -3,41 +3,41 @@ import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import image from "../../images/card-img.png";
 
-function NewsCardsList() {
-  const articles = [
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-  ];
+function NewsCardsList(props) {
+  // const articles = [
+  //   {
+  //     image: image,
+  //     date: "December 14, 2020",
+  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
+  //     keyword: "nature",
+  //     text:
+  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
+  //     source: "National parks traveler",
+  //   },
+  //   {
+  //     image: image,
+  //     date: "December 14, 2020",
+  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
+  //     keyword: "nature",
+  //     text:
+  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
+  //     source: "National parks traveler",
+  //   },
+  //   {
+  //     image: image,
+  //     date: "December 14, 2020",
+  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
+  //     keyword: "nature",
+  //     text:
+  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
+  //     source: "National parks traveler",
+  //   },
+  // ];
   return (
     <section className="newsCardList">
       <h3 className="newsCardList__title">Search results</h3>
       <ul className="newsCardList__gallery">
-        {articles.map((article, id) => (
+        {props.articles.map((article, id) => (
           <NewsCard article={article} key={id}>
             <div className="card__buttons-wrapper card__buttons-wrapper_placement_right">
               <button type="button" className="card__button">
