@@ -24,7 +24,7 @@ function Main(props) {
               menuButtonVisible={props.menuButtonVisible}
             />
           )}
-          <SearchForm />
+          <SearchForm onSearch={props.onSearch}/>
         </div>
       </section>
       <NewsCardsList />

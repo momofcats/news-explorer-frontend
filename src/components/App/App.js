@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import SignInPopup from "../SignInPopup/SignInPopup";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
+import newsApi from "../../utils/NewsApi";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,11 +15,22 @@ const App = () => {
   const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
   const [isMenuButtonVisible, setIsMenuButtonVisible] = useState(true);
+
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
     setIsSignInPopupOpen(false);
     setIsSignUpPopupOpen(false);
     setIsMenuButtonVisible(true);
+  }
+  function handleNewsSearch(keyword) {
+    newsApi
+      .searchNews(keyword)
+      .then((articles) => {
+        console.log(articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function handleSignUpSuccess() {
     setIsInfoToolTipPopupOpen(true);
@@ -60,6 +72,7 @@ const App = () => {
         </Route>
         <Route path="/">
           <Main
+            onSearch={handleNewsSearch}
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}
             isLoggedIn={false}
