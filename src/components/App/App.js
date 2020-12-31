@@ -19,6 +19,7 @@ const App = () => {
   const [articles, setArticles] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const [isNothingFound, setIsNothingFound] = useState(false);
 
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
@@ -31,11 +32,17 @@ const App = () => {
     newsApi
       .searchNews(keyword)
       .then((res) => {
-        setArticles(res.articles);
-        localStorage.setItem("storedArticles", JSON.stringify(articles));
-        console.log(articles);
-        setIsloading(false);
-        setIsSearching(true);
+        if(res.articles.length === 0) {
+          setIsloading(false);
+          setIsNothingFound(true);
+        }
+        else {
+          setArticles(res.articles);
+          // localStorage.setItem("storedArticles", JSON.stringify(articles));
+          setIsloading(false);
+          setIsSearching(true);
+        }
+        
       })
       .catch((err) => {
         console.log(err);
@@ -81,6 +88,8 @@ const App = () => {
         </Route>
         <Route path="/">
           <Main
+          
+            isNothingFound={isNothingFound}
             onSearch={handleNewsSearch}
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}

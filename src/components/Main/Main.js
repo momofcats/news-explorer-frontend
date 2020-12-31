@@ -27,8 +27,9 @@ function Main(props) {
           <SearchForm onSearch={props.onSearch}/>
         </div>
       </section>
-      {props.isSearching && <NewsCardsList articles={props.articles}/>}
+      {props.isSearching && <NewsCardsList articles={props.articles} />}
       {props.isLoading && <Preloader />}
+      {props.isNothingFound && <NotFound />}
       
       <About />
     </>

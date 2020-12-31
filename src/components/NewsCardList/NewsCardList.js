@@ -1,43 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
-import image from "../../images/card-img.png";
 
 function NewsCardsList(props) {
-  // const articles = [
-  //   {
-  //     image: image,
-  //     date: "December 14, 2020",
-  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
-  //     keyword: "nature",
-  //     text:
-  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-  //     source: "National parks traveler",
-  //   },
-  //   {
-  //     image: image,
-  //     date: "December 14, 2020",
-  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
-  //     keyword: "nature",
-  //     text:
-  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-  //     source: "National parks traveler",
-  //   },
-  //   {
-  //     image: image,
-  //     date: "December 14, 2020",
-  //     title: "Nostalgic Photos of Tourists in U.S. National Parks",
-  //     keyword: "nature",
-  //     text:
-  //       "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-  //     source: "National parks traveler",
-  //   },
-  // ];
+  const articles = props.articles;
+  const limit = 3;
+  const length = articles.length;
+  const [index, setIndex] = useState(3);
+  const [articlesToShow, setArticlesToShow] = useState(articles.slice(0, limit));  
+  const updateArray = (start, end) => {
+    const newArticles = articles.slice(start, end);
+    setArticlesToShow([...articlesToShow, ...newArticles]);
+  }
+  const handleShowMore = () => {
+    updateArray(index, index + limit);
+    setIndex(index + limit);
+  }
+ 
   return (
     <section className="newsCardList">
       <h3 className="newsCardList__title">Search results</h3>
       <ul className="newsCardList__gallery">
-        {props.articles.map((article, id) => (
+        {articlesToShow.map((article, id) => (
           <NewsCard article={article} key={id}>
             <div className="card__buttons-wrapper card__buttons-wrapper_placement_right">
               <button type="button" className="card__button">
@@ -55,7 +39,7 @@ function NewsCardsList(props) {
           </NewsCard>
         ))}
       </ul>
-      <button className="newsCardList__btn">Show more</button>
+      {index <= length && <button className="newsCardList__btn" type="button" onClick={handleShowMore}>Show more</button>}
     </section>
   );
 }
