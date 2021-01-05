@@ -3,25 +3,11 @@ import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
 function NewsCardsList(props) {
-  const articles = props.articles;
-  const limit = 3;
-  const length = articles.length;
-  const [index, setIndex] = useState(3);
-  const [articlesToShow, setArticlesToShow] = useState(articles.slice(0, limit));  
-  const updateArray = (start, end) => {
-    const newArticles = articles.slice(start, end);
-    setArticlesToShow([...articlesToShow, ...newArticles]);
-  }
-  const handleShowMore = () => {
-    updateArray(index, index + limit);
-    setIndex(index + limit);
-  }
- 
   return (
     <section className="newsCardList">
       <h3 className="newsCardList__title">Search results</h3>
       <ul className="newsCardList__gallery">
-        {articlesToShow.map((article, id) => (
+        {props.articles.map((article, id) => (
           <NewsCard article={article} key={id}>
             <div className="card__buttons-wrapper card__buttons-wrapper_placement_right">
               <button type="button" className="card__button">
@@ -39,7 +25,7 @@ function NewsCardsList(props) {
           </NewsCard>
         ))}
       </ul>
-      {index <= length && <button className="newsCardList__btn" type="button" onClick={handleShowMore}>Show more</button>}
+      {props.isShowMoreVisible && <button className="newsCardList__btn" type="button" onClick={props.onShowMore}>Show more</button>}
     </section>
   );
 }
