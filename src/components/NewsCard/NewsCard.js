@@ -5,7 +5,7 @@ function NewsCard(props) {
   const article = props.article;
   return (
     <li className="card">
-      <img className="card__img" src={article.urlToImage} alt="article" />
+      {article.urlToImage && <img className="card__img" src={article.urlToImage} alt="article" />}
       {props.children}
       <div className="card__description-wrapper">
         <p className="card__date">{article.publishedAt}</p>

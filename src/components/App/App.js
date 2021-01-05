@@ -9,7 +9,6 @@ import SignInPopup from "../SignInPopup/SignInPopup";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
 import newsApi from "../../utils/NewsApi";
 
-
 const App = () => {
   const limit = 3;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,11 +21,10 @@ const App = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const [isNothingFound, setIsNothingFound] = useState(false);
-  const [articlesToShow, setArticlesToShow] = useState([]); 
+  const [articlesToShow, setArticlesToShow] = useState([]);
   const [index, setIndex] = useState(limit);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
 
- 
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
     setIsSignInPopupOpen(false);
@@ -34,6 +32,7 @@ const App = () => {
     setIsMenuButtonVisible(true);
   }
   function handleNewsSearch(keyword) {
+    setIsNothingFound(false);
     setIsShowMoreVisible(true);
     setIsloading(true);
     setIndex(limit);
@@ -41,19 +40,17 @@ const App = () => {
       .searchNews(keyword)
       .then((res) => {
         const data = res.articles;
-        if(data.length === 0) {
+        if (data.length === 0) {
           setIsloading(false);
           setIsNothingFound(true);
           setIsSearching(false);
-        }
-        else {
+        } else {
           setArticles(data);
           setArticlesToShow(data.slice(0, limit));
           localStorage.setItem("storedArticles", JSON.stringify(articles));
           setIsloading(false);
           setIsSearching(true);
         }
-        
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +65,7 @@ const App = () => {
   function handleShowMore() {
     updateArticlesToShow(index, index + limit);
     setIndex(index + limit);
-    if (index >= length-1) {
+    if (index >= length - 1) {
       setIsShowMoreVisible(false);
     }
   }
@@ -113,8 +110,8 @@ const App = () => {
         </Route>
         <Route path="/">
           <Main
-          isShowMoreVisible={isShowMoreVisible}
-          onShowMore={handleShowMore}
+            isShowMoreVisible={isShowMoreVisible}
+            onShowMore={handleShowMore}
             isNothingFound={isNothingFound}
             onSearch={handleNewsSearch}
             onSignIn={handleSignInClick}
