@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
@@ -26,6 +25,7 @@ function NewsCardsList(props) {
         ))}
       </ul>
       {props.isShowMoreVisible && <button className="newsCardList__btn" type="button" onClick={props.onShowMore}>Show more</button>}
+      <p>{props.errorMessage}</p>
     </section>
   );
 }

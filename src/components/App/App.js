@@ -24,6 +24,7 @@ const App = () => {
   const [articlesToShow, setArticlesToShow] = useState([]);
   const [index, setIndex] = useState(limit);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
@@ -32,6 +33,7 @@ const App = () => {
     setIsMenuButtonVisible(true);
   }
   function handleNewsSearch(keyword) {
+    localStorage.clear();
     setIsNothingFound(false);
     setIsShowMoreVisible(true);
     setIsloading(true);
@@ -47,13 +49,16 @@ const App = () => {
         } else {
           setArticles(data);
           setArticlesToShow(data.slice(0, limit));
-          localStorage.setItem("storedArticles", JSON.stringify(articles));
+          localStorage.setItem("storedArticles", JSON.stringify(data));
           setIsloading(false);
           setIsSearching(true);
         }
       })
       .catch((err) => {
-        console.log(err);
+        setIsloading(false);
+        setIsShowMoreVisible(false);
+        setIsSearching(true);
+        setErrorMessage("Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later")
       });
   }
 
@@ -91,6 +96,15 @@ const App = () => {
   }
 
   useEffect(() => {
+    const storedArticles = JSON.parse(localStorage.getItem("storedArticles"));
+    if(storedArticles) {
+      setArticles(storedArticles);
+      setArticlesToShow(storedArticles.slice(0, limit));
+      setIsSearching(true);
+    }
+  }, []);
+
+  useEffect(() => {
     document.addEventListener("keydown", handleEscKey);
 
     return () => {
@@ -110,6 +124,7 @@ const App = () => {
         </Route>
         <Route path="/">
           <Main
+          errorMessage={errorMessage}
             isShowMoreVisible={isShowMoreVisible}
             onShowMore={handleShowMore}
             isNothingFound={isNothingFound}

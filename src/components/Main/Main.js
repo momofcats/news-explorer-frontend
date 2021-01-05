@@ -28,7 +28,7 @@ function Main(props) {
         </div>
       </section>
       {props.isLoading && <Preloader />}
-      {props.isSearching && <NewsCardsList articles={props.articles} isShowMoreVisible={props.isShowMoreVisible} onShowMore={props.onShowMore}/> }
+      {props.isSearching && <NewsCardsList errorMessage={props.errorMessage} articles={props.articles} isShowMoreVisible={props.isShowMoreVisible} onShowMore={props.onShowMore}/> }
       {props.isNothingFound && <NotFound />}
       
       <About />
