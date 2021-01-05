@@ -9,7 +9,7 @@ function NewsCardsList(props) {
         {props.articles.map((article, id) => (
           <NewsCard article={article} key={id}>
             <div className="card__buttons-wrapper card__buttons-wrapper_placement_right">
-              <button type="button" className="card__button">
+              <button type="button" className="card__button" disabled={!props.isLoggedIn}>
                 <svg
                   className="card__button-bookmark"
                   width="24"
@@ -18,7 +18,7 @@ function NewsCardsList(props) {
                 >
                   <path d="M11.382 15.714L6 19.942V4h12v15.942l-5.382-4.228-.618-.486-.618.486z" />
                 </svg>
-                <span className="card__tooltip-text">Sign in to save articles</span>
+                {!props.isLoggedIn && <span className="card__tooltip-text">Sign in to save articles</span>}
               </button>
             </div>
           </NewsCard>

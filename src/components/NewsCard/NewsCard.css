@@ -66,6 +66,10 @@
   cursor: pointer;
 }
 
+.card__button:disabled {
+  color: #000;
+}
+
 .card__button-bookmark_marked {
   fill: #2f71e5;
   stroke: #2f71e5;
