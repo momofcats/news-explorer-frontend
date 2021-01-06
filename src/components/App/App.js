@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, Route, Switch } from "react-router-dom";
+import { withRouter, Route, Switch, useHistory  } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
 import SavedNewsPage from "../SavedNewsPage/SavedNewsPage";
@@ -8,10 +8,12 @@ import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import SignInPopup from "../SignInPopup/SignInPopup";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
 import newsApi from "../../utils/NewsApi";
+import mainApi from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const App = () => {
   const limit = 3;
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
   const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
@@ -24,7 +26,41 @@ const App = () => {
   const [articlesToShow, setArticlesToShow] = useState([]);
   const [index, setIndex] = useState(limit);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const history = useHistory();
+  const [currentUser, setCurrentUser] = useState({});
+
+  function handleRegister(credentials) {
+    mainApi
+      .register(credentials)
+      .then(() => {
+        closeAllPopups();
+        handleSignUpSuccess();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleLogin(credentials) {
+    mainApi.authorize(credentials)
+    .then((data) => {
+      localStorage.setItem("jwt", data.token);
+    })
+    .then(() => {
+      setIsLoggedIn(true);
+      closeAllPopups();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  function handleLogOut() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    history.push("/");
+  }
 
   function closeAllPopups() {
     setIsInfoToolTipPopupOpen(false);
@@ -58,7 +94,9 @@ const App = () => {
         setIsloading(false);
         setIsShowMoreVisible(false);
         setIsSearching(true);
-        setErrorMessage("Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later")
+        setErrorMessage(
+          "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later"
+        );
       });
   }
 
@@ -86,9 +124,10 @@ const App = () => {
 
   function handleSignInClick() {
     setIsMenuButtonVisible(false);
-    setIsSignUpPopupOpen(false);
+    closeAllPopups();
     setIsSignInPopupOpen(true);
   }
+
   function handleEscKey(evt) {
     if (evt.key === "Escape") {
       closeAllPopups();
@@ -97,7 +136,7 @@ const App = () => {
 
   useEffect(() => {
     const storedArticles = JSON.parse(localStorage.getItem("storedArticles"));
-    if(storedArticles) {
+    if (storedArticles) {
       setArticles(storedArticles);
       setArticlesToShow(storedArticles.slice(0, limit));
       setIsSearching(true);
@@ -114,17 +153,19 @@ const App = () => {
 
   return (
     <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <Route path="/saved-news" exact>
           <SavedNewsPage
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}
             isLoggedIn={() => setIsLoggedIn(true)}
+            onLogOut={handleLogOut}
           />
         </Route>
         <Route path="/">
           <Main
-          errorMessage={errorMessage}
+            errorMessage={errorMessage}
             isShowMoreVisible={isShowMoreVisible}
             onShowMore={handleShowMore}
             isNothingFound={isNothingFound}
@@ -135,21 +176,29 @@ const App = () => {
             articles={articlesToShow}
             isSearching={isSearching}
             isLoading={isLoading}
+            onLogOut={handleLogOut}
           />
         </Route>
       </Switch>
+      </CurrentUserContext.Provider>
       <Footer />
       <SignInPopup
         onClose={closeAllPopups}
         isOpen={isSignInPopUpOpen}
         onSignUpClick={handleSignUpClick}
+        onLogin={handleLogin}
       />
       <SignUpPopup
         onClose={closeAllPopups}
         isOpen={isSignUpPopupOpen}
         onSignInClick={handleSignInClick}
+        onRegister={handleRegister}
       />
-      <InfoToolTip onClose={closeAllPopups} isOpen={isInfoToolTipPopupOpen} />
+      <InfoToolTip
+        onClose={closeAllPopups}
+        isOpen={isInfoToolTipPopupOpen}
+        onSignInClick={handleSignInClick}
+      />
     </>
   );
 };

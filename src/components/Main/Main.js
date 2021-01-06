@@ -18,6 +18,7 @@ function Main(props) {
               isLoggedIn={props.isLoggedIn}
               onSignIn={props.onSignIn}
               menuButtonVisible={props.menuButtonVisible}
+              onLogOut={props.onLogOut}
             />
           ) : (
             <Header

@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import Popup from "../Popup/Popup";
 
 function SignInPopup(props) {
+  const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	
+	const resetForm = () => {
+		setEmail("");
+		setPassword("");
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (!email || !password) {
+			return;
+		}
+		props.onLogin({email, password});
+		resetForm();
+	}
   return (
     <Popup onClose={props.onClose} isOpen={props.isOpen}>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h2 className="form__title">Sign in</h2>
         <label className="form__input-label" htmlFor="email">
           Email
@@ -15,6 +31,9 @@ function SignInPopup(props) {
           type="email"
           placeholder="Enter email"
           required
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+
         />
         <span className="form__input-error">Some error</span>
         <label className="form__input-label" htmlFor="password">
@@ -26,6 +45,8 @@ function SignInPopup(props) {
           type="password"
           placeholder="Enter password"
           required
+          value={password}
+					onChange={(e) => setPassword(e.target.value)}
         />
         <span className="form__input-error">Some error</span>
         <button className="button button_type_primary" type="submit">

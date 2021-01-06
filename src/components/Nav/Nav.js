@@ -2,8 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
 import logout from '../../images/logout.svg';
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Nav(props) {
+  const handleClick = () =>{
+    props.onLogOut();
+  }
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <nav className={`nav ${props.isOpen ? "nav_active" : ""}`}>
       <NavLink
@@ -32,9 +37,9 @@ function Nav(props) {
       ) : (
         <button
           className="nav__button nav__button_type_sign-out"
-          onClick={props.onSignIn}
+          onClick={handleClick}
         >
-          Elise<img className="nav__icon" src={logout} alt="icon"/>
+          {currentUser.name}<img className="nav__icon" src={logout} alt="icon" />
         </button>
       )}
     </nav>

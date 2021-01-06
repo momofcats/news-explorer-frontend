@@ -9,7 +9,11 @@ function InfoToolTip(props) {
         <p className="infoToolTip__text">
           Registration successfully completed!
         </p>
-        <button className="button-link" type="button">
+        <button
+          className="button-link"
+          type="button"
+          onClick={props.onSignInClick}
+        >
           Sign in
         </button>
       </Popup>
