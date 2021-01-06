@@ -13,8 +13,9 @@ function Main(props) {
     <>
       <section className="main">
         <div className="main__overlay">
-          {props.loggedIn ? (
+          {props.isLoggedIn ? (
             <SavedNewsHeader
+              isLoggedIn={props.isLoggedIn}
               onSignIn={props.onSignIn}
               menuButtonVisible={props.menuButtonVisible}
             />

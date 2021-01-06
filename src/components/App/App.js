@@ -11,7 +11,7 @@ import newsApi from "../../utils/NewsApi";
 
 const App = () => {
   const limit = 3;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
   const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
@@ -131,7 +131,7 @@ const App = () => {
             onSearch={handleNewsSearch}
             onSignIn={handleSignInClick}
             menuButtonVisible={isMenuButtonVisible}
-            isLoggedIn={false}
+            isLoggedIn={isLoggedIn}
             articles={articlesToShow}
             isSearching={isSearching}
             isLoading={isLoading}
