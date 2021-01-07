@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, Route, Switch, useHistory  } from "react-router-dom";
+import { withRouter, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
 import SavedNewsPage from "../SavedNewsPage/SavedNewsPage";
@@ -43,22 +43,25 @@ const App = () => {
   }
 
   function handleLogin(credentials) {
-    mainApi.authorize(credentials)
-    .then((data) => {
-      localStorage.setItem("jwt", data.token);
-    })
-    .then(() => {
-      setIsLoggedIn(true);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    mainApi
+      .authorize(credentials)
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+      })
+      .then(() => {
+        setIsLoggedIn(true);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleLogOut() {
-    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setIsSearching(false);
+    localStorage.clear();
+    setArticlesToShow([]);
     history.push("/");
   }
 
@@ -151,35 +154,48 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      setIsLoggedIn(true);
+      mainApi
+        .getUser(jwt)
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch(console.log);
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
-    <CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route path="/saved-news" exact>
-          <SavedNewsPage
-            onSignIn={handleSignInClick}
-            menuButtonVisible={isMenuButtonVisible}
-            isLoggedIn={() => setIsLoggedIn(true)}
-            onLogOut={handleLogOut}
-          />
-        </Route>
-        <Route path="/">
-          <Main
-            errorMessage={errorMessage}
-            isShowMoreVisible={isShowMoreVisible}
-            onShowMore={handleShowMore}
-            isNothingFound={isNothingFound}
-            onSearch={handleNewsSearch}
-            onSignIn={handleSignInClick}
-            menuButtonVisible={isMenuButtonVisible}
-            isLoggedIn={isLoggedIn}
-            articles={articlesToShow}
-            isSearching={isSearching}
-            isLoading={isLoading}
-            onLogOut={handleLogOut}
-          />
-        </Route>
-      </Switch>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route path="/saved-news" exact>
+            <SavedNewsPage
+              onSignIn={handleSignInClick}
+              menuButtonVisible={isMenuButtonVisible}
+              isLoggedIn={() => setIsLoggedIn(true)}
+              onLogOut={handleLogOut}
+            />
+          </Route>
+          <Route path="/">
+            <Main
+              errorMessage={errorMessage}
+              isShowMoreVisible={isShowMoreVisible}
+              onShowMore={handleShowMore}
+              isNothingFound={isNothingFound}
+              onSearch={handleNewsSearch}
+              onSignIn={handleSignInClick}
+              menuButtonVisible={isMenuButtonVisible}
+              isLoggedIn={isLoggedIn}
+              articles={articlesToShow}
+              isSearching={isSearching}
+              isLoading={isLoading}
+              onLogOut={handleLogOut}
+            />
+          </Route>
+        </Switch>
       </CurrentUserContext.Provider>
       <Footer />
       <SignInPopup

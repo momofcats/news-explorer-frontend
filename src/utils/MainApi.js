@@ -2,7 +2,27 @@ class MainApi {
     constructor(options) {
         this.options = options;
     }
-    
+	
+	// setToken(token) {
+	// 	this.token = token;
+	// }
+
+	getUser(token) {
+		return fetch(`${this.options.baseUrl}/users/me`, {
+			method: 'GET',
+			headers: {
+				"Content-Type": "application/json",
+				'Authorization': `Bearer ${token}`,
+			},
+		}).then(async (res) => {
+			if (res.ok) {
+				return res.json();
+			}
+			const body = await res.json();
+			return Promise.reject(body.error || body.message);
+		});
+	}
+
 	register(credentials) {
 		return this.request("/signup", "POST", JSON.stringify(credentials));
     }
@@ -11,8 +31,8 @@ class MainApi {
 		return this.request("/signin", "POST", JSON.stringify(credentials))
 	}
     
-	request(authApi, method, body) {
-		return fetch(`${this.options.baseUrl}${authApi}`, {
+	request(mainApi, method, body) {
+		return fetch(`${this.options.baseUrl}${mainApi}`, {
 			headers: {
 				"Content-Type": "application/json",
 			},
