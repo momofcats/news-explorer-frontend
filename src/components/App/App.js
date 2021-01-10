@@ -29,6 +29,30 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
+  const [savedNews, setSavedNews] = useState([]);
+
+  function handleArticleBookmark(article) {
+    const bookmarkedArticle = savedNews.find((i) => i.title === article.title);
+    if (bookmarkedArticle !== undefined) {
+      mainApi.removeBookmark(bookmarkedArticle._id).then(() => {
+        article.isBookmarked = false;
+        setArticles(articles);
+        localStorage.setItem("storedArticles", JSON.stringify(articles));
+        const newSavedNews = savedNews.filter(
+          (a) => a._id !== bookmarkedArticle._id
+        );
+        setSavedNews(newSavedNews);
+      });
+    } else {
+      mainApi.addBookmark(article).then((res) => {
+        article.isBookmarked = true;
+        res.isBookmarked = true;
+        setArticles(articles);
+        localStorage.setItem("storedArticles", JSON.stringify(articles));
+        setSavedNews([res, ...savedNews]);
+      });
+    }
+  }
 
   function handleRegister(credentials) {
     mainApi
@@ -47,6 +71,7 @@ const App = () => {
       .authorize(credentials)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
+        mainApi.setToken(data.token);
       })
       .then(() => {
         setIsLoggedIn(true);
@@ -86,6 +111,11 @@ const App = () => {
           setIsNothingFound(true);
           setIsSearching(false);
         } else {
+          data.forEach(function (i) {
+            i.keyword = keyword;
+            i.isBookmarked = false;
+            i.source = i.source.name;
+          });
           setArticles(data);
           setArticlesToShow(data.slice(0, limit));
           localStorage.setItem("storedArticles", JSON.stringify(data));
@@ -157,15 +187,29 @@ const App = () => {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
+      mainApi.setToken(jwt);
       setIsLoggedIn(true);
       mainApi
-        .getUser(jwt)
+        .getUser()
         .then((data) => {
           setCurrentUser(data);
         })
         .catch(console.log);
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      mainApi.setToken(jwt);
+      mainApi
+        .getSavedArticles()
+        .then((data) => {
+          setSavedNews(data);
+        })
+        .catch(console.log);
+    }
+  }, []);
 
   return (
     <>
@@ -181,6 +225,7 @@ const App = () => {
           </Route>
           <Route path="/">
             <Main
+              onBookmarkClick={handleArticleBookmark}
               errorMessage={errorMessage}
               isShowMoreVisible={isShowMoreVisible}
               onShowMore={handleShowMore}

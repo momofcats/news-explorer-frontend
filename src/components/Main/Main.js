@@ -1,11 +1,11 @@
 import React from "react";
 import "./Main.css";
 import Header from "../Header/Header";
-import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import NewsCardsList from "../NewsCardList/NewsCardList";
-import NotFound from '../NotFound/NotFound';
+import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
 
 function Main(props) {
@@ -26,13 +26,22 @@ function Main(props) {
               menuButtonVisible={props.menuButtonVisible}
             />
           )}
-          <SearchForm onSearch={props.onSearch}/>
+          <SearchForm onSearch={props.onSearch} />
         </div>
       </section>
       {props.isLoading && <Preloader />}
-      {props.isSearching && <NewsCardsList errorMessage={props.errorMessage} articles={props.articles} isShowMoreVisible={props.isShowMoreVisible} onShowMore={props.onShowMore} isLoggedIn={props.isLoggedIn}/> }
+      {props.isSearching && (
+        <NewsCardsList
+          errorMessage={props.errorMessage}
+          articles={props.articles}
+          isShowMoreVisible={props.isShowMoreVisible}
+          onShowMore={props.onShowMore}
+          isLoggedIn={props.isLoggedIn}
+          onBookmarkClick={props.onBookmarkClick}
+        />
+      )}
       {props.isNothingFound && <NotFound />}
-      
+
       <About />
     </>
   );

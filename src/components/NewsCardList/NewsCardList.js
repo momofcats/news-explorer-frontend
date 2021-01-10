@@ -1,14 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
 function NewsCardsList(props) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const bookmarkedArticleClassName = isBookmarked
-    ? "card__button-bookmark_marked"
-    : "card__button-bookmark";
-  function handleClick() {
-    setIsBookmarked(true);
+  function handleClick(article) {
+    props.onBookmarkClick(article);
   }
 
   return (
@@ -22,10 +18,14 @@ function NewsCardsList(props) {
                 type="button"
                 className="card__button"
                 disabled={!props.isLoggedIn}
-                onClick={handleClick}
+                onClick={() => handleClick(article)}
               >
                 <svg
-                  className={bookmarkedArticleClassName}
+                  className={
+                    article.isBookmarked
+                      ? "card__button-bookmark_marked"
+                      : "card__button-bookmark"
+                  }
                   width="24"
                   height="24"
                   xmlns="http://www.w3.org/2000/svg"
