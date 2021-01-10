@@ -178,7 +178,6 @@ const App = () => {
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscKey);
-
     return () => {
       document.removeEventListener("keydown", handleEscKey);
     };
