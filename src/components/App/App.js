@@ -204,7 +204,8 @@ const App = () => {
       mainApi
         .getSavedArticles()
         .then((data) => {
-          setSavedNews(data);
+          const ownersData = data.filter((i) => i.owner === currentUser._id);
+          setSavedNews(ownersData);
         })
         .catch(console.log);
     }
