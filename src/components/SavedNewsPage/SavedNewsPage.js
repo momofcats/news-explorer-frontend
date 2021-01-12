@@ -12,8 +12,8 @@ function SavedNewsPage(props) {
         menuButtonVisible={props.menuButtonVisible}
         isLoggedIn={props.isLoggedIn}
       />
-      <SavedArticles />
-      <SavedNews />
+      <SavedArticles savedNews={props.savedNews}/>
+      <SavedNews savedNews={props.savedNews}/>
     </>
   );
 }

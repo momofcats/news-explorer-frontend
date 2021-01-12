@@ -1,50 +1,12 @@
 import React from "react";
 import "./SavedNews.css";
 import NewsCard from "../NewsCard/NewsCard";
-import image from "../../images/card-img.png";
 
-function SavedNews() {
-  const articles = [
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-    {
-      image: image,
-      date: "December 14, 2020",
-      title: "Nostalgic Photos of Tourists in U.S. National Parks",
-      keyword: "nature",
-      text:
-        "The cybersecurity landscape changed dramatically in 2020. As organizations scrambled to keep employees connected in a world of remote everything, threat actors capitalized on the chaos. Between January and October, 36 billion records were exposed in data brea…",
-      source: "National parks traveler",
-    },
-  ];
+function SavedNews({savedNews}) {
+  
   return (
     <ul className="savedNews">
-      {articles.map((article, id) => (
+      {savedNews.map((article, id) => (
         <NewsCard article={article} key={id}>
           <div className="card__buttons-wrapper card__buttons-wrapper_placement_spaceout">
             <p className="card__keyword">{article.keyword}</p>

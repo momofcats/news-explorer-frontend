@@ -209,7 +209,7 @@ const App = () => {
         })
         .catch(console.log);
     }
-  }, []);
+  }, [isLoggedIn, currentUser]);
 
   return (
     <>
@@ -221,6 +221,7 @@ const App = () => {
               menuButtonVisible={isMenuButtonVisible}
               isLoggedIn={() => setIsLoggedIn(true)}
               onLogOut={handleLogOut}
+              savedNews={savedNews}
             />
           </Route>
           <Route path="/">
