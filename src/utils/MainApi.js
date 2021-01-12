@@ -49,11 +49,11 @@ class MainApi {
 			body: JSON.stringify({
 				keyword: article.keyword,
 				title: article.title,
-				text: article.description,
-				date: article.publishedAt,
+				description: article.description,
+				publishedAt: article.publishedAt,
 				source: article.source,
-				link: article.url,
-				image: article.urlToImage,
+				url: article.url,
+				urlToImage: article.urlToImage,
 			})
 		}).then(async (res) => {
 			if (res.ok) {
