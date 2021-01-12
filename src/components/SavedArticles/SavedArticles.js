@@ -1,7 +1,7 @@
 import React from "react";
 import "./SavedArticles.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import {MAXITEMS, TRUNCATEDITEMS} from "../../utils/constants";
+import { MAXITEMS, TRUNCATEDITEMS } from "../../utils/constants";
 
 function sortByFrequency(array) {
   let frequency = {};
@@ -19,8 +19,15 @@ function sortByFrequency(array) {
   });
 }
 
+function concatinateArrayElem(arr,x,y) {
+  if (arr.length <= x) {
+    return arr.join(", ");
+  } else {
+    return `${arr[0]}, ${arr[1]}, and ${arr.length - y} more`;
+  }
+}
+
 function SavedArticles({ savedNews }) {
-  
   const currentUser = React.useContext(CurrentUserContext);
   const keywords = savedNews
     .map((item) => item.keyword)
@@ -28,14 +35,10 @@ function SavedArticles({ savedNews }) {
       a.push(e.charAt(0).toUpperCase() + e.substr(1));
       return a;
     }, []);
+   
   const sortedKeywords = sortByFrequency(keywords);
-  const firstKeyword = sortedKeywords[0];
-  const secondKeyword = sortedKeywords[1]
-  const thirdKeyword =
-    sortedKeywords.length > MAXITEMS
-      ? `and ${sortedKeywords.length - TRUNCATEDITEMS} more`
-      : sortedKeywords[2];
-
+  const concatinatedKeywords = concatinateArrayElem(sortedKeywords, MAXITEMS, TRUNCATEDITEMS);
+  
   return (
     <section className="savedArticles">
       <h1 className="savedArticles__title">Saved Articles</h1>
@@ -45,7 +48,7 @@ function SavedArticles({ savedNews }) {
       <p>
         By keywords:{" "}
         <span className="savedArticles__accent">
-          {firstKeyword}, {secondKeyword}{thirdKeyword !== undefined && ", "}{thirdKeyword}.
+          {concatinatedKeywords}.
         </span>
       </p>
     </section>
