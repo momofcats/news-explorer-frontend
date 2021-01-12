@@ -13,7 +13,7 @@ function SavedNewsPage(props) {
         isLoggedIn={props.isLoggedIn}
       />
       <SavedArticles savedNews={props.savedNews}/>
-      <SavedNews savedNews={props.savedNews}/>
+      <SavedNews savedNews={props.savedNews} onDelete={props.onDelete}/>
     </>
   );
 }

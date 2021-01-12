@@ -9,13 +9,14 @@ import SignInPopup from "../SignInPopup/SignInPopup";
 import SignUpPopup from "../SignUpPopup/SignUpPopup";
 import newsApi from "../../utils/NewsApi";
 import mainApi from "../../utils/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const App = () => {
   const limit = 3;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
-  const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
+  const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(true);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
   const [isMenuButtonVisible, setIsMenuButtonVisible] = useState(true);
   const [articles, setArticles] = useState([]);
@@ -31,6 +32,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [savedNews, setSavedNews] = useState([]);
 
+ 
   function handleArticleBookmark(article) {
     const bookmarkedArticle = savedNews.find((i) => i.title === article.title);
     if (bookmarkedArticle !== undefined) {
@@ -52,6 +54,16 @@ const App = () => {
         setSavedNews([res, ...savedNews]);
       });
     }
+  }
+
+  function handleDeleteClick(article) {
+    mainApi
+      .removeBookmark(article._id)
+      .then((res) => {
+        const newSavedNews = savedNews.filter((a) => a._id !== article._id);
+        setSavedNews(newSavedNews);
+      })
+      .catch(console.log);
   }
 
   function handleRegister(credentials) {
@@ -113,6 +125,7 @@ const App = () => {
         } else {
           data.forEach(function (i) {
             i.keyword = keyword;
+            console.log(i.keyword);
             i.isBookmarked = false;
             i.source = i.source.name;
           });
@@ -198,32 +211,36 @@ const App = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      mainApi.setToken(jwt);
-      mainApi
-        .getSavedArticles()
-        .then((data) => {
-          const ownersData = data.filter((i) => i.owner === currentUser._id);
-          setSavedNews(ownersData);
-        })
-        .catch(console.log);
+    if (isLoggedIn) {
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        mainApi.setToken(jwt);
+        mainApi
+          .getSavedArticles()
+          .then((data) => {
+            const ownersData = data.filter((i) => i.owner === currentUser._id);
+            setSavedNews(ownersData);
+          })
+          .catch(console.log);
+      }
     }
-  }, [isLoggedIn, currentUser]);
+  }, [isLoggedIn]);
 
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
-          <Route path="/saved-news" exact>
-            <SavedNewsPage
-              onSignIn={handleSignInClick}
-              menuButtonVisible={isMenuButtonVisible}
-              isLoggedIn={() => setIsLoggedIn(true)}
-              onLogOut={handleLogOut}
-              savedNews={savedNews}
-            />
-          </Route>
+          <ProtectedRoute
+            path="/saved-news"
+            exact
+            component={SavedNewsPage}
+            onSignIn={handleSignInClick}
+            menuButtonVisible={isMenuButtonVisible}
+            isLoggedIn={isLoggedIn}
+            onLogOut={handleLogOut}
+            savedNews={savedNews}
+            onDelete={handleDeleteClick}
+          />
           <Route path="/">
             <Main
               onBookmarkClick={handleArticleBookmark}

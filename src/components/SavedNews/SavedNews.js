@@ -2,16 +2,23 @@ import React from "react";
 import "./SavedNews.css";
 import NewsCard from "../NewsCard/NewsCard";
 
-function SavedNews({savedNews}) {
-  
+function capitalizeFirstLetter(s) {
+  return s.charAt(0).toUpperCase() + s.substr(1);
+}
+
+function SavedNews({savedNews, onDelete}) {
+
+  function handleClick(article) {
+    onDelete(article);
+  }
   return (
     <ul className="savedNews">
       {savedNews.map((article, id) => (
         <NewsCard article={article} key={id}>
           <div className="card__buttons-wrapper card__buttons-wrapper_placement_spaceout">
-            <p className="card__keyword">{article.keyword}</p>
+            <p className="card__keyword">{capitalizeFirstLetter(article.keyword)}</p>
              
-              <button type="button" className="card__button">
+              <button type="button" className="card__button" onClick={() => handleClick(article)}>
                 <svg
                   className="card__button-trash"
                   width="24"
