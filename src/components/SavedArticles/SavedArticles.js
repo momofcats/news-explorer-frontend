@@ -1,6 +1,7 @@
 import React from "react";
 import "./SavedArticles.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {MAXITEMS, TRUNCATEDITEMS} from "../../utils/constants";
 
 function sortByFrequency(array) {
   let frequency = {};
@@ -19,6 +20,7 @@ function sortByFrequency(array) {
 }
 
 function SavedArticles({ savedNews }) {
+  
   const currentUser = React.useContext(CurrentUserContext);
   const keywords = savedNews
     .map((item) => item.keyword)
@@ -30,8 +32,8 @@ function SavedArticles({ savedNews }) {
   const firstKeyword = sortedKeywords[0];
   const secondKeyword = sortedKeywords[1]
   const thirdKeyword =
-    sortedKeywords.length > 3
-      ? `and ${sortedKeywords.length - 2} more`
+    sortedKeywords.length > MAXITEMS
+      ? `and ${sortedKeywords.length - TRUNCATEDITEMS} more`
       : sortedKeywords[2];
 
   return (
