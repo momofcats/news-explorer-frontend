@@ -16,7 +16,7 @@ const App = () => {
   const limit = 3;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
-  const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(true);
+  const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
   const [isSignUpPopupOpen, setIsSignUpPopupOpen] = useState(false);
   const [isMenuButtonVisible, setIsMenuButtonVisible] = useState(true);
   const [articles, setArticles] = useState([]);
