@@ -2,55 +2,43 @@ import { useState, useCallback } from "react";
 const useForm = ({ onSubmit, validationRules }) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+  const [isValid, setIsValid] = useState(false);
 
-    const validators = validationRules?.[name];
-    if (validators) {
-      validators.map((validator) => {
-        const isValid = validator.rule(value);
-        if (!isValid) {
-          setErrors({ ...errors, [name]: validator.message(name) });
-        }
-        return errors;
-      });
-    }
+  const handleChange = (e) => {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
+
+  const handleInvalid = (e) => {
+    e.preventDefault();
+    const target = e.target;
+    const name = target.name;
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Object.entries(validationRules).forEach(([name, validators]) => {
-      validators.forEach((validator) => {
-        const isValid = validator.rule(values[name]);
-        if (!isValid) {
-          errors[name] = validator.message(name);
-          console.log(errors);
-        }
-      });
-    });
-    setErrors({ ...errors });
-
-    if (Object.keys(errors).length !== 0) {
-      return;
-    } else {
+    if (e.target.checkValidity()) {
       onSubmit(values);
       resetForm();
     }
   };
 
-  const resetForm = useCallback(() => {
-    setValues({});
-    setErrors({});
-  }, [setValues, setErrors]);
-  return {
-    handleChange,
-    handleSubmit,
-    resetForm,
-    values,
-    errors,
-  };
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
+  return { values, handleChange, handleSubmit, handleInvalid, errors, isValid, resetForm };
 };
 
 export default useForm;
