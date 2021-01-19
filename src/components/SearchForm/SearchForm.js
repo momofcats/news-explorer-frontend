@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
-import useForm from "../Validation/useForm";
+import useForm from "../Validation/useForm.js"
+import { required } from "../Validation/rules";
 
 function SearchForm(props) {
-  // const [values, setValues] = useState({ keyword: "" });
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setValues({ ...values, [name]: value });
-  // };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(values.keyword);
-  //   props.onSearch(values.keyword);
-  // };
-  const { handleSubmit, handleChange, values } = useForm(props.onSearch);
+  const { handleSubmit, handleChange, values, errors } = useForm({
+    onSubmit: submit,
+    validationRules: {
+      keyword: [required],
+      // keyword: [required]
+      // email: [required, validEmail]
+    }
+  });
 
+  function submit(values) {
+    props.onSearch(values.keyword);
+  }
   return (
     <form className="searchForm" onSubmit={handleSubmit} noValidate>
       <h1 className="searchForm__title">What's going on in the world?</h1>
@@ -27,10 +28,10 @@ function SearchForm(props) {
           className="searchForm__input"
           placeholder="Enter topic"
           onChange={handleChange}
-          value={values.keyword}
+          value={values.keyword ?? ""}
           name="keyword"
         />
-        <span className="form__input-error">Some error</span>
+        {errors.keyword && <span className="form__input-error">{errors.keyword}</span>}
         <button
           type="submit"
           className="searchForm__button button button_type_primary"

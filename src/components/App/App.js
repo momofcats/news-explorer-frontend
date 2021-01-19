@@ -125,7 +125,6 @@ const App = () => {
         } else {
           data.forEach(function (i) {
             i.keyword = keyword;
-            console.log(i.keyword);
             i.isBookmarked = false;
             i.source = i.source.name;
           });
