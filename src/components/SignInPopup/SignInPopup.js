@@ -1,55 +1,70 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Popup from "../Popup/Popup";
+import useForm from "../Validation/useForm.js";
 
 function SignInPopup(props) {
-  const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	
-	const resetForm = () => {
-		setEmail("");
-		setPassword("");
-	}
+  const {
+    handleSubmit,
+    handleChange,
+    handleInvalid,
+    values,
+    errors,
+    isValid,
+    resetForm,
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (!email || !password) {
-			return;
-		}
-		props.onLogin({email, password});
-		resetForm();
-	}
+  } = useForm({
+    onSubmit: submit,
+  });
+  function submit(values) {
+    const email = values.email;
+    const password = values.password;
+    props.onLogin({ email, password });
+  }
+
+  function handleClose() {
+    props.onClose();
+    resetForm();
+  }
+
   return (
-    <Popup onClose={props.onClose} isOpen={props.isOpen}>
+    <Popup onClose={handleClose} isOpen={props.isOpen}>
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="form__title">Sign in</h2>
         <label className="form__input-label" htmlFor="email">
           Email
         </label>
         <input
-          id="email"
+          name="email"
           className="form__input"
           type="email"
           placeholder="Enter email"
           required
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-
+          value={values.email ?? ""}
+          onChange={handleChange}
+          onInvalid={handleInvalid}
         />
-        <span className="form__input-error">Some error</span>
+        <span className="form__input-error">{errors.email}</span>
         <label className="form__input-label" htmlFor="password">
           Password
         </label>
         <input
-          id="password"
+          name="password"
           className="form__input"
           type="password"
           placeholder="Enter password"
           required
-          value={password}
-					onChange={(e) => setPassword(e.target.value)}
+          value={values.password ?? ""}
+          onChange={handleChange}
+          onInvalid={handleInvalid}
         />
-        <span className="form__input-error">Some error</span>
-        <button className="button button_type_primary" type="submit">
+        <span className="form__input-error">{errors.password}</span>
+        <button
+          className={`button ${
+            isValid ? "button_type_primary" : "button_type_disabled"
+          }`}
+          type="submit"
+          disabled={!isValid}
+        >
           Sign in
         </button>
       </form>

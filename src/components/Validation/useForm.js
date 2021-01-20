@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-const useForm = ({ onSubmit, validationRules }) => {
+const useForm = ({ onSubmit }) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -15,10 +15,6 @@ const useForm = ({ onSubmit, validationRules }) => {
 
   const handleInvalid = (e) => {
     e.preventDefault();
-    const target = e.target;
-    const name = target.name;
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(false);
   };
 
   const handleSubmit = (e) => {
@@ -38,7 +34,7 @@ const useForm = ({ onSubmit, validationRules }) => {
     },
     [setValues, setErrors, setIsValid]
   );
-  return { values, handleChange, handleSubmit, handleInvalid, errors, isValid, resetForm };
+  return { values, handleChange, handleSubmit, handleInvalid, resetForm, errors, isValid, resetForm };
 };
 
 export default useForm;

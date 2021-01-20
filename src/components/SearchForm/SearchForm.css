@@ -26,7 +26,6 @@
   background: #ffffff;
   box-sizing: border-box;
   border-radius: 100px;
-  margin-bottom: 80px;
 }
 
 .searchForm__input {
@@ -39,6 +38,14 @@
   border-radius: 100px;
 }
 
+.searchForm__input-error {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #ff0000;
+  font-size: 18px;
+  padding-bottom: 80px
+}
 .searchForm__input:focus {
   outline: 2px solid #347eff;
 }

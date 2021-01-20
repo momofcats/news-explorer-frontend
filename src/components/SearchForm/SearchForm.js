@@ -1,7 +1,6 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./SearchForm.css";
 import useForm from "../Validation/useForm.js"
-import { required } from "../Validation/rules";
 
 function SearchForm(props) {
   const { handleSubmit, handleChange, handleInvalid, values, errors } = useForm({
@@ -28,14 +27,16 @@ function SearchForm(props) {
           name="keyword"
           required
         />
-        {errors.keyword && <span className="form__input-error">{errors.keyword}</span>}
+       
         <button
           type="submit"
           className="searchForm__button button button_type_primary"
         >
           Search
         </button>
+       
       </div>
+      <span className="searchForm__input-error">{errors.keyword}</span>
     </form>
   );
 }

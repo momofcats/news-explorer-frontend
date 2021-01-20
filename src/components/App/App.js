@@ -31,6 +31,7 @@ const App = () => {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [savedNews, setSavedNews] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
 
  
   function handleArticleBookmark(article) {
@@ -109,7 +110,7 @@ const App = () => {
     setIsMenuButtonVisible(true);
   }
   function handleNewsSearch(keyword) {
-    localStorage.clear();
+    localStorage.removeItem("storedArticles");
     setIsNothingFound(false);
     setIsShowMoreVisible(true);
     setIsloading(true);
@@ -203,14 +204,13 @@ const App = () => {
       mainApi
         .getUser()
         .then((data) => {
-          setCurrentUser(data);
+          setCurrentUser(data); 
         })
         .catch(console.log);
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (isLoggedIn) {
       const jwt = localStorage.getItem("jwt");
       if (jwt) {
         mainApi.setToken(jwt);
@@ -221,9 +221,12 @@ const App = () => {
             setSavedNews(ownersData);
           })
           .catch(console.log);
-      }
-    }
-  }, [isLoggedIn]);
+      }   
+}, [isLoggedIn, currentUser._id]);
+
+ 
+
+  
 
   return (
     <>

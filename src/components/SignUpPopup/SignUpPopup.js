@@ -1,21 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Popup from "../Popup/Popup";
+import useForm from "../Validation/useForm.js";
 
 function SignUpPopup(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const {
+    handleSubmit,
+    handleChange,
+    handleInvalid,
+    values,
+    errors,
+    isValid,
+  } = useForm({
+    onSubmit: submit,
+  });
 
-	const resetForm = () => {
-		setEmail("");
-    setPassword("");
-    setName("");
-	}
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-		props.onRegister({ email, password, name });
-		resetForm();
+  function submit(values) {
+    const email = values.email;
+    const password = values.password;
+    const name = values.userName;
+    props.onRegister({ email, password, name });
   }
   return (
     <Popup onClose={props.onClose} isOpen={props.isOpen}>
@@ -25,44 +28,53 @@ function SignUpPopup(props) {
           Email
         </label>
         <input
-          id="email"
+          name="email"
           className="form__input"
           type="email"
           placeholder="Enter email"
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email ?? ""}
+          onChange={handleChange}
+          onInvalid={handleInvalid}
         />
-        <span className="form__input-error">Some error</span>
+        <span className="form__input-error">{errors.email}</span>
         <label className="form__input-label" htmlFor="password">
           Password
         </label>
         <input
-          id="password"
+          name="password"
           className="form__input"
           type="password"
           placeholder="Enter password"
           required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password ?? ""}
+          onChange={handleChange}
+          onInvalid={handleInvalid}
         />
-        <span className="form__input-error">Some error</span>
+        <span className="form__input-error">{errors.password}</span>
         <label className="form__input-label" htmlFor="username">
           Username
         </label>
         <input
-          id="username"
+          name="userName"
           className="form__input"
           type="text"
           placeholder="Enter your username"
           required
           minLength="2"
           maxLength="30"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.userName ?? ""}
+          onChange={handleChange}
+          onInvalid={handleInvalid}
         />
-        <span className="form__input-error">Some error</span>
-        <button className="button button_type_primary" type="submit">
+        <span className="form__input-error">{errors.userName}</span>
+        <button
+          className={`button ${
+            isValid ? "button_type_primary" : "button_type_disabled"
+          }`}
+          type="submit"
+          disabled={!isValid}
+        >
           Sign up
         </button>
       </form>
