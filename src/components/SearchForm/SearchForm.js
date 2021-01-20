@@ -1,11 +1,13 @@
 import React from "react";
 import "./SearchForm.css";
-import useForm from "../Validation/useForm.js"
+import useForm from "../UseForm/useForm.js";
 
 function SearchForm(props) {
-  const { handleSubmit, handleChange, handleInvalid, values, errors } = useForm({
-    onSubmit: submit
-  });
+  const { handleSubmit, handleChange, handleInvalid, values, errors } = useForm(
+    {
+      onSubmit: submit,
+    }
+  );
 
   function submit(values) {
     props.onSearch(values.keyword);
@@ -26,14 +28,13 @@ function SearchForm(props) {
           value={values.keyword ?? ""}
           name="keyword"
           required
-        /> 
+        />
         <button
           type="submit"
           className="searchForm__button button button_type_primary"
         >
           Search
         </button>
-       
       </div>
       <span className="searchForm__input-error">{errors.keyword}</span>
     </form>
