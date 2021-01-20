@@ -26,8 +26,7 @@ function SearchForm(props) {
           value={values.keyword ?? ""}
           name="keyword"
           required
-        />
-       
+        /> 
         <button
           type="submit"
           className="searchForm__button button button_type_primary"
