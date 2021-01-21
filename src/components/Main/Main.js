@@ -13,19 +13,21 @@ function Main(props) {
     <>
       <section className="main">
         <div className="main__overlay">
-          {props.isLoggedIn ? (
+          {/* {props.isLoggedIn ? (
             <SavedNewsHeader
               isLoggedIn={props.isLoggedIn}
               onSignIn={props.onSignIn}
               menuButtonVisible={props.menuButtonVisible}
               onLogOut={props.onLogOut}
             />
-          ) : (
+          ) : ( */}
             <Header
               onSignIn={props.onSignIn}
               menuButtonVisible={props.menuButtonVisible}
+              isLoggedIn={props.isLoggedIn}
+              onLogOut={props.onLogOut}
             />
-          )}
+          {/* )} */}
           <SearchForm onSearch={props.onSearch} />
         </div>
       </section>

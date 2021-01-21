@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, isLoggedIn, onSignIn, ...props }) => {
+const ProtectedRoute = (props) => {
+	const isLoggedIn = props.isLoggedIn;
+	const onSignIn = props.onSignIn;
+	const Component = props.component;
 	useEffect(() => {
 		if(!isLoggedIn) {
 			onSignIn();

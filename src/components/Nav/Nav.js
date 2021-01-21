@@ -1,43 +1,40 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
-import logout from '../../images/logout.svg';
+import logout from '../../images/logout-light.svg';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Nav(props) {
-  const handleClick = () =>{
-    props.onLogOut();
-  }
+function Nav({isOpen, isLoggedIn, onLogOut, onSignIn}) {
+  
   const currentUser = React.useContext(CurrentUserContext);
   return (
-    <nav className={`nav ${props.isOpen ? "nav_active" : ""}`}>
+    <nav className={`nav ${isOpen ? "nav_active" : ""}`}>
       <NavLink
-        className={`nav__link ${
-          !props.isLoggedIn ? "nav__link_active-light" : ""
-        }`}
+        className="nav__link nav__link_active-light"
+
         to="/"
       >
         Home
       </NavLink>
-      {props.isLoggedIn && (
+      {isLoggedIn && (
         <NavLink
-          className="nav__link nav__link_active-dark"
+          className="nav__link"
           to="/saved-news"
         >
           Saved Articles
         </NavLink>
       )}
-      {!props.isLoggedIn ? (
+      {!isLoggedIn ? (
         <button
           className="nav__button nav__button_type_sign-in"
-          onClick={props.onSignIn}
+          onClick={onSignIn}
         >
           Sign in
         </button>
       ) : (
         <button
           className="nav__button nav__button_type_sign-out"
-          onClick={handleClick}
+          onClick={onLogOut}
         >
           {currentUser.name}<img className="nav__icon" src={logout} alt="icon" />
         </button>

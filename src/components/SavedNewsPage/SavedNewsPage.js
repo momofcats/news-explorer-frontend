@@ -8,7 +8,7 @@ function SavedNewsPage(props) {
     <>
       <SavedNewsHeader
         onLogOut={props.onLogOut}
-        onSignIn={props.onSignIn}
+        // onSignIn={props.onSignIn}
         menuButtonVisible={props.menuButtonVisible}
         isLoggedIn={props.isLoggedIn}
       />

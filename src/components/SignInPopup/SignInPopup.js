@@ -10,7 +10,6 @@ function SignInPopup(props) {
     values,
     errors,
     isValid,
-    resetForm,
   } = useForm({
     onSubmit: submit,
   });
@@ -20,13 +19,8 @@ function SignInPopup(props) {
     props.onLogin({ email, password });
   }
 
-  function handleClose() {
-    props.onClose();
-    resetForm();
-  }
-
   return (
-    <Popup onClose={handleClose} isOpen={props.isOpen}>
+    <Popup onClose={props.onClose} isOpen={props.isOpen}>
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="form__title">Sign in</h2>
         <label className="form__input-label" htmlFor="email">

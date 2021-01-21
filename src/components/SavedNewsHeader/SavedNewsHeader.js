@@ -8,10 +8,10 @@ function SavedNewsHeader({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) 
     expanded ? setExpanded(false) : setExpanded(true);
   }
 
-  const handleSignIn = useCallback(() => {
-    setExpanded(false);
-    onSignIn();
-  }, [onSignIn]);
+  // const handleSignIn = useCallback(() => {
+  //   setExpanded(false);
+  //   onSignIn();
+  // }, [onSignIn]);
   return (
     <header
       className={`header header_theme_light ${
@@ -31,7 +31,7 @@ function SavedNewsHeader({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) 
           ></button>
         )}
       </div>
-      <Nav isOpen={expanded} onSignIn={handleSignIn} isLoggedIn={isLoggedIn} onLogOut={onLogOut}/>
+      <Nav isOpen={expanded} isLoggedIn={isLoggedIn} onLogOut={onLogOut}/>
       {expanded && <div className="header__overlay"></div>}
     </header>
   );

@@ -31,9 +31,8 @@ const App = () => {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({});
   const [savedNews, setSavedNews] = useState([]);
-  const [savedArticles, setSavedArticles] = useState([]);
+  const [isSendingRequest, setIsSendingRequest] = useState(true);
 
- 
   function handleArticleBookmark(article) {
     const bookmarkedArticle = savedNews.find((i) => i.title === article.title);
     if (bookmarkedArticle !== undefined) {
@@ -202,32 +201,69 @@ const App = () => {
       mainApi.setToken(jwt);
       setIsLoggedIn(true);
       mainApi
-        .getUser()
-        .then((data) => {
-          setCurrentUser(data); 
+        .getAppInfo()
+        .then(([articles, user]) => {
+          setIsSendingRequest(false);
+          setIsLoggedIn(true);
+          const ownersData = articles.filter((i) => i.owner === user._id);
+          setSavedNews(ownersData);
+          setCurrentUser(user);
         })
         .catch(console.log);
     }
+    setIsSendingRequest(false);
   }, [isLoggedIn]);
-
-  useEffect(() => {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        mainApi.setToken(jwt);
-        mainApi
-          .getSavedArticles()
-          .then((data) => {
-            const ownersData = data.filter((i) => i.owner === currentUser._id);
-            setSavedNews(ownersData);
-          })
-          .catch(console.log);
-      }   
-}, [isLoggedIn, currentUser._id]);
-
- 
-
   
+  // useEffect(() => {
+  //   if(!isLoggedIn) {
+  //     const  jwt = localStorage.getItem("jwt");
+  //     if(jwt) {
+  //       mainApi.setToken(jwt);
+  //         setIsLoggedIn(true);
+  //         setIsSendingRequest(false);
 
+  //     } else {
+  //       setIsSendingRequest(false);
+  //     }
+  //   }
+  // },[isLoggedIn]);
+
+  //   useEffect(() => {
+  //       const jwt = localStorage.getItem("jwt");
+  //       if(jwt) {
+  //         mainApi.setToken(jwt);
+
+  //         mainApi
+  //         .getUser()
+  //         .then((res) => {
+  //           if(res) {
+  //             setIsLoggedIn(true);
+  //             setCurrentUser(res);
+
+  //           }
+  //         })
+  //         .catch(console.log);
+  //       }
+  //   },[]);
+
+  //   useEffect(() => {
+  //         const jwt = localStorage.getItem("jwt");
+  //         if(jwt) {
+  //           mainApi.setToken(jwt);
+  //           mainApi
+  //           .getSavedArticles()
+  //           .then((data) => {
+  //             setIsLoggedIn(true);
+  //             const ownersData = data.filter((i) => i.owner === currentUser._id);
+  //             setSavedNews(ownersData);
+  //           })
+  //           .catch(console.log);
+  //         }
+  // }, []);
+
+  if (isSendingRequest) {
+    return null;
+  }
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -263,18 +299,19 @@ const App = () => {
         </Switch>
       </CurrentUserContext.Provider>
       <Footer />
-      <SignInPopup
+      {isSignInPopUpOpen && <SignInPopup
         onClose={closeAllPopups}
-        isOpen={isSignInPopUpOpen}
+        isOpen={true}
         onSignUpClick={handleSignUpClick}
         onLogin={handleLogin}
-      />
-      <SignUpPopup
+      />}
+      
+      {isSignUpPopupOpen && <SignUpPopup
         onClose={closeAllPopups}
-        isOpen={isSignUpPopupOpen}
+        isOpen={true}
         onSignInClick={handleSignInClick}
         onRegister={handleRegister}
-      />
+      />}
       <InfoToolTip
         onClose={closeAllPopups}
         isOpen={isInfoToolTipPopupOpen}

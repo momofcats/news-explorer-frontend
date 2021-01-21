@@ -47,7 +47,8 @@
 }
 
 .nav__button_type_sign-out {
-  border: 1px solid #1a1b22;
+  border: 1px solid #fff;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-content: center;
