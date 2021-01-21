@@ -38,6 +38,11 @@
   background-color: transparent;
   height: 48px;
   margin-left: 20px;
+  border: 1px solid #000;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .nav__button_type_sign-in {
@@ -46,12 +51,9 @@
   width: 176px;
 }
 
-.nav__button_type_sign-out {
+.nav__button_theme_light {
   border: 1px solid #fff;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-content: center;
 }
 
 .nav__icon {
@@ -117,6 +119,8 @@
     padding: 16px;
     font-size: 18px;
     height: 56px;
+    align-self: flex-start;
+    margin-left: 40px;
   }
 
   .nav__button_type_sign-in {
@@ -126,8 +130,6 @@
 
   .nav__button_type_sign-out {
     width: min-content;
-    align-self: flex-start;
-    margin-left: 40px;
   }
 }
 

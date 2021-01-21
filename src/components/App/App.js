@@ -262,7 +262,7 @@ const closeAllPopups = useCallback(() => {
   // }, []);
 
   if (isSendingRequest) {
-    return null;
+  return null;
   }
   return (
     <>

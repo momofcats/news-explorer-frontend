@@ -1,17 +1,13 @@
-import React, { useState, useCallback } from "react";
-import Nav from "../Nav/Nav";
+import React, { useState } from "react";
+import SavedNewsNav from "../SavedNewsNav/SavedNewsNav";
 import "../Header/Header.css";
 
-function SavedNewsHeader({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) {
+function SavedNewsHeader({ menuButtonVisible, onLogOut }) {
   const [expanded, setExpanded] = useState(false);
   function toggleMenu() {
     expanded ? setExpanded(false) : setExpanded(true);
   }
 
-  // const handleSignIn = useCallback(() => {
-  //   setExpanded(false);
-  //   onSignIn();
-  // }, [onSignIn]);
   return (
     <header
       className={`header header_theme_light ${
@@ -31,7 +27,7 @@ function SavedNewsHeader({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) 
           ></button>
         )}
       </div>
-      <Nav isOpen={expanded} isLoggedIn={isLoggedIn} onLogOut={onLogOut}/>
+      <SavedNewsNav isOpen={expanded} onLogOut={onLogOut}/>
       {expanded && <div className="header__overlay"></div>}
     </header>
   );
