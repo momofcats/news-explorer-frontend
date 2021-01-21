@@ -50,7 +50,6 @@ function NewsCardsList(props) {
           Show more
         </button>
       )}
-      <p>{props.errorMessage}</p>
     </section>
   );
 }

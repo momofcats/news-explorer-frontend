@@ -2,7 +2,7 @@ import React from "react";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNews from "../SavedNews/SavedNews";
 import SavedArticles from "../SavedArticles/SavedArticles";
-
+import NotFound from "../NotFound/NotFound";
 function SavedNewsPage(props) {
   return (
     <>
@@ -11,8 +11,14 @@ function SavedNewsPage(props) {
         menuButtonVisible={props.menuButtonVisible}
         isLoggedIn={props.isLoggedIn}
       />
-      <SavedArticles savedNews={props.savedNews} />
-      <SavedNews savedNews={props.savedNews} onDelete={props.onDelete} />
+      {props.isNothingFound ? (
+        <NotFound>{props.errorMessage}</NotFound>
+      ) : (
+        <>
+          <SavedArticles savedNews={props.savedNews} />
+          <SavedNews savedNews={props.savedNews} onDelete={props.onDelete} />
+        </>
+      )}
     </>
   );
 }

@@ -18,14 +18,13 @@ function Main(props) {
             isLoggedIn={props.isLoggedIn}
             onLogOut={props.onLogOut}
           />
-
           <SearchForm onSearch={props.onSearch} />
         </div>
       </section>
+      {props.isNothingFound && <NotFound>{props.errorMessage}</NotFound>}
       {props.isLoading && <Preloader />}
       {props.isSearching && (
         <NewsCardsList
-          errorMessage={props.errorMessage}
           articles={props.articles}
           isShowMoreVisible={props.isShowMoreVisible}
           onShowMore={props.onShowMore}
@@ -33,7 +32,7 @@ function Main(props) {
           onBookmarkClick={props.onBookmarkClick}
         />
       )}
-      {props.isNothingFound && <NotFound />}
+      
       <About />
     </>
   );

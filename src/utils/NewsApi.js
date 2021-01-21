@@ -9,7 +9,7 @@ class NewsApi {
   }
 
   searchNews(keyword) {
-    return fetch(`${this.options.baseUrl}?q=${keyword}&from=${pastDate}&to=${currentDate}&pageSize=10&apiKey=${KEY}`, {
+    return fetch(`${this.options.baseUrl}?q=${keyword}&from=${pastDate}&to=${currentDate}&pageSize=100&apiKey=${KEY}`, {
       method: "GET",
     }).then(async (res) => {
         if (res.ok) {

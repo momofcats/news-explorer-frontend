@@ -22,6 +22,7 @@ class MainApi {
 			return Promise.reject(body.error || body.message);
 		});
 	}
+
 	getSavedArticles() {
 		return fetch(`${this.options.baseUrl}/articles`, {
 			method: 'GET',
@@ -41,6 +42,7 @@ class MainApi {
 	getAppInfo() {
 		return Promise.all([this.getSavedArticles(), this.getUser()]);
 	}
+	
 	addBookmark(article) {
 
 		return fetch(`${this.options.baseUrl}/articles`, {

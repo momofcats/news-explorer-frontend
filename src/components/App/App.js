@@ -47,6 +47,9 @@ const App = () => {
           (a) => a._id !== bookmarkedArticle._id
         );
         setSavedNews(newSavedNews);
+      }).catch((err) => {
+        setErrorMessage(err);
+        setIsNothingFound(true);
       });
     } else {
       mainApi.addBookmark(article).then((res) => {
@@ -55,6 +58,9 @@ const App = () => {
         setArticles(articles);
         localStorage.setItem("storedArticles", JSON.stringify(articles));
         setSavedNews([res, ...savedNews]);
+      }).catch((err) => {
+        setErrorMessage(err);
+        setIsNothingFound(true);
       });
     }
   }
@@ -67,7 +73,8 @@ const App = () => {
         setSavedNews(newSavedNews);
       })
       .catch((err) => {
-        setServerMessage(err);
+        setErrorMessage(err);
+        setIsNothingFound(true);
       });
   }
 
@@ -133,6 +140,7 @@ const App = () => {
           setIsloading(false);
           setIsNothingFound(true);
           setIsSearching(false);
+          setErrorMessage(errorMessages.nothingFound);
         } else {
           data.forEach(function (i) {
             i.keyword = keyword;
@@ -147,9 +155,10 @@ const App = () => {
         }
       })
       .catch((err) => {
+        setIsNothingFound(true);
         setIsloading(false);
         setIsShowMoreVisible(false);
-        setIsSearching(true);
+        setIsSearching(false);
         setErrorMessage(errorMessages.serverIsDownError);
       });
   }
@@ -226,7 +235,8 @@ const App = () => {
           setCurrentUser(user);
         })
         .catch((err) => {
-          setServerMessage(err);
+          setIsNothingFound(true);
+          setErrorMessage(err);
         });
     }
     setIsSendingRequest(false);
@@ -250,6 +260,8 @@ const App = () => {
             onLogOut={handleLogOut}
             savedNews={savedNews}
             onDelete={handleDeleteClick}
+            isNothingFound={isNothingFound}
+            errorMessage={errorMessage}
           />
           <Route path="/">
             <Main
