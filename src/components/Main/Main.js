@@ -1,7 +1,6 @@
 import React from "react";
 import "./Main.css";
 import Header from "../Header/Header";
-import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import NewsCardsList from "../NewsCardList/NewsCardList";
@@ -13,21 +12,13 @@ function Main(props) {
     <>
       <section className="main">
         <div className="main__overlay">
-          {/* {props.isLoggedIn ? (
-            <SavedNewsHeader
-              isLoggedIn={props.isLoggedIn}
-              onSignIn={props.onSignIn}
-              menuButtonVisible={props.menuButtonVisible}
-              onLogOut={props.onLogOut}
-            />
-          ) : ( */}
-            <Header
-              onSignIn={props.onSignIn}
-              menuButtonVisible={props.menuButtonVisible}
-              isLoggedIn={props.isLoggedIn}
-              onLogOut={props.onLogOut}
-            />
-          {/* )} */}
+          <Header
+            onSignIn={props.onSignIn}
+            menuButtonVisible={props.menuButtonVisible}
+            isLoggedIn={props.isLoggedIn}
+            onLogOut={props.onLogOut}
+          />
+
           <SearchForm onSearch={props.onSearch} />
         </div>
       </section>
@@ -43,7 +34,6 @@ function Main(props) {
         />
       )}
       {props.isNothingFound && <NotFound />}
-
       <About />
     </>
   );

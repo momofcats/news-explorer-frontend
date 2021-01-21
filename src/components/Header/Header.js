@@ -7,10 +7,12 @@ function Header({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) {
   function toggleMenu() {
     expanded ? setExpanded(false) : setExpanded(true);
   }
+
   const handleSignIn = useCallback(() => {
     setExpanded(false);
     onSignIn();
   }, [onSignIn]);
+
   return (
     <header className={`header ${expanded ? "header_active" : ""}`}>
       <div className="header__wrapper">
@@ -32,7 +34,6 @@ function Header({ onSignIn, menuButtonVisible, isLoggedIn, onLogOut }) {
         isLoggedIn={isLoggedIn}
         onLogOut={onLogOut}
       />
-
       {expanded && <div className="header__overlay"></div>}
     </header>
   );

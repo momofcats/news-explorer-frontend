@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "../Popup/Popup";
 import useForm from "../UseForm/useForm.js";
 
-function SignInPopup(props) {
+function SignInPopup({ onClose, isOpen, serverMessage, onLogin, onSignUpClick }) {
   const {
     handleSubmit,
     handleChange,
@@ -13,14 +13,17 @@ function SignInPopup(props) {
   } = useForm({
     onSubmit: submit,
   });
+  
   function submit(values) {
     const email = values.email;
     const password = values.password;
-    props.onLogin({ email, password });
+    onLogin({ email, password });
+    
   }
 
+
   return (
-    <Popup onClose={props.onClose} isOpen={props.isOpen}>
+    <Popup onClose={onClose} isOpen={isOpen}>
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="form__title">Sign in</h2>
         <label className="form__input-label" htmlFor="email">
@@ -51,6 +54,8 @@ function SignInPopup(props) {
           onInvalid={handleInvalid}
         />
         <span className="form__input-error">{errors.password}</span>
+        <div className="form__button-wrapper">
+        <span className="form__server-message">{serverMessage}</span>
         <button
           className={`button ${
             isValid ? "button_type_primary" : "button_type_disabled"
@@ -60,13 +65,15 @@ function SignInPopup(props) {
         >
           Sign in
         </button>
+        </div>
+        
       </form>
       <div className="form__wrapper">
         <p>or</p>
         <button
           className="button-link"
           type="button"
-          onClick={props.onSignUpClick}
+          onClick={onSignUpClick}
         >
           Sign up
         </button>

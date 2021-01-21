@@ -11,9 +11,11 @@ import newsApi from "../../utils/NewsApi";
 import mainApi from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { errorMessages } from "../../utils/errorMessages";
+import { MAXITEMS } from "../../utils/constants";
 
 const App = () => {
-  const limit = 3;
+  const limit = MAXITEMS;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
   const [isSignInPopUpOpen, setIsSignInPopupOpen] = useState(false);
@@ -32,6 +34,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [savedNews, setSavedNews] = useState([]);
   const [isSendingRequest, setIsSendingRequest] = useState(true);
+  const [serverMessage, setServerMessage] = useState("");
 
   function handleArticleBookmark(article) {
     const bookmarkedArticle = savedNews.find((i) => i.title === article.title);
@@ -63,7 +66,9 @@ const App = () => {
         const newSavedNews = savedNews.filter((a) => a._id !== article._id);
         setSavedNews(newSavedNews);
       })
-      .catch(console.log);
+      .catch((err) => {
+        setServerMessage(err);
+      });
   }
 
   function handleRegister(credentials) {
@@ -74,7 +79,7 @@ const App = () => {
         handleSignUpSuccess();
       })
       .catch((err) => {
-        console.log(err);
+        setServerMessage(err);
       });
   }
 
@@ -90,7 +95,7 @@ const App = () => {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        setServerMessage(err);
       });
   }
 
@@ -101,12 +106,18 @@ const App = () => {
     setArticlesToShow([]);
     history.push("/");
   }
-const closeAllPopups = useCallback(() => {
-  setIsInfoToolTipPopupOpen(false);
-  setIsSignInPopupOpen(false);
-  setIsSignUpPopupOpen(false);
-  setIsMenuButtonVisible(true);
-},[setIsInfoToolTipPopupOpen, setIsSignInPopupOpen, setIsSignUpPopupOpen, setIsMenuButtonVisible]);
+
+  const closeAllPopups = useCallback(() => {
+    setIsInfoToolTipPopupOpen(false);
+    setIsSignInPopupOpen(false);
+    setIsSignUpPopupOpen(false);
+    setIsMenuButtonVisible(true);
+  }, [
+    setIsInfoToolTipPopupOpen,
+    setIsSignInPopupOpen,
+    setIsSignUpPopupOpen,
+    setIsMenuButtonVisible,
+  ]);
 
   function handleNewsSearch(keyword) {
     localStorage.removeItem("storedArticles");
@@ -139,9 +150,7 @@ const closeAllPopups = useCallback(() => {
         setIsloading(false);
         setIsShowMoreVisible(false);
         setIsSearching(true);
-        setErrorMessage(
-          "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later"
-        );
+        setErrorMessage(errorMessages.serverIsDownError);
       });
   }
 
@@ -170,23 +179,30 @@ const closeAllPopups = useCallback(() => {
   function handleSignInClick() {
     setIsMenuButtonVisible(false);
     closeAllPopups();
+    setServerMessage("");
     setIsSignInPopupOpen(true);
   }
 
-  const handleEscKey = useCallback((evt) => {
-    if (evt.key === "Escape") {
-      closeAllPopups();
-    }
-  }, [closeAllPopups]);
+  const handleEscKey = useCallback(
+    (evt) => {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    },
+    [closeAllPopups]
+  );
 
   useEffect(() => {
-    const storedArticles = JSON.parse(localStorage.getItem("storedArticles"));
-    if (storedArticles) {
-      setArticles(storedArticles);
-      setArticlesToShow(storedArticles.slice(0, limit));
-      setIsSearching(true);
-    }
-  }, []);
+    const jwt = localStorage.getItem("jwt");
+    if(jwt) {
+      const storedArticles = JSON.parse(localStorage.getItem("storedArticles"));
+      if (storedArticles) {
+        setArticles(storedArticles);
+        setArticlesToShow(storedArticles.slice(0, limit));
+        setIsSearching(true);
+      }
+    }  
+  },[limit]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscKey);
@@ -209,61 +225,17 @@ const closeAllPopups = useCallback(() => {
           setSavedNews(ownersData);
           setCurrentUser(user);
         })
-        .catch(console.log);
+        .catch((err) => {
+          setServerMessage(err);
+        });
     }
     setIsSendingRequest(false);
   }, [isLoggedIn]);
-  
-  // useEffect(() => {
-  //   if(!isLoggedIn) {
-  //     const  jwt = localStorage.getItem("jwt");
-  //     if(jwt) {
-  //       mainApi.setToken(jwt);
-  //         setIsLoggedIn(true);
-  //         setIsSendingRequest(false);
-
-  //     } else {
-  //       setIsSendingRequest(false);
-  //     }
-  //   }
-  // },[isLoggedIn]);
-
-  //   useEffect(() => {
-  //       const jwt = localStorage.getItem("jwt");
-  //       if(jwt) {
-  //         mainApi.setToken(jwt);
-
-  //         mainApi
-  //         .getUser()
-  //         .then((res) => {
-  //           if(res) {
-  //             setIsLoggedIn(true);
-  //             setCurrentUser(res);
-
-  //           }
-  //         })
-  //         .catch(console.log);
-  //       }
-  //   },[]);
-
-  //   useEffect(() => {
-  //         const jwt = localStorage.getItem("jwt");
-  //         if(jwt) {
-  //           mainApi.setToken(jwt);
-  //           mainApi
-  //           .getSavedArticles()
-  //           .then((data) => {
-  //             setIsLoggedIn(true);
-  //             const ownersData = data.filter((i) => i.owner === currentUser._id);
-  //             setSavedNews(ownersData);
-  //           })
-  //           .catch(console.log);
-  //         }
-  // }, []);
 
   if (isSendingRequest) {
-  return null;
+    return null;
   }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -299,19 +271,25 @@ const closeAllPopups = useCallback(() => {
         </Switch>
       </CurrentUserContext.Provider>
       <Footer />
-      {isSignInPopUpOpen && <SignInPopup
-        onClose={closeAllPopups}
-        isOpen={true}
-        onSignUpClick={handleSignUpClick}
-        onLogin={handleLogin}
-      />}
-      
-      {isSignUpPopupOpen && <SignUpPopup
-        onClose={closeAllPopups}
-        isOpen={true}
-        onSignInClick={handleSignInClick}
-        onRegister={handleRegister}
-      />}
+      {isSignInPopUpOpen && (
+        <SignInPopup
+          onClose={closeAllPopups}
+          isOpen={true}
+          onSignUpClick={handleSignUpClick}
+          onLogin={handleLogin}
+          serverMessage={serverMessage}
+        />
+      )}
+
+      {isSignUpPopupOpen && (
+        <SignUpPopup
+          onClose={closeAllPopups}
+          isOpen={true}
+          onSignInClick={handleSignInClick}
+          onRegister={handleRegister}
+          serverMessage={serverMessage}
+        />
+      )}
       <InfoToolTip
         onClose={closeAllPopups}
         isOpen={isInfoToolTipPopupOpen}

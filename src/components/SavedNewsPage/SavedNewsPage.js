@@ -8,12 +8,11 @@ function SavedNewsPage(props) {
     <>
       <SavedNewsHeader
         onLogOut={props.onLogOut}
-        // onSignIn={props.onSignIn}
         menuButtonVisible={props.menuButtonVisible}
         isLoggedIn={props.isLoggedIn}
       />
-      <SavedArticles savedNews={props.savedNews}/>
-      <SavedNews savedNews={props.savedNews} onDelete={props.onDelete}/>
+      <SavedArticles savedNews={props.savedNews} />
+      <SavedNews savedNews={props.savedNews} onDelete={props.onDelete} />
     </>
   );
 }

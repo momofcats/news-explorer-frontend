@@ -5,6 +5,7 @@ const ProtectedRoute = (props) => {
 	const isLoggedIn = props.isLoggedIn;
 	const onSignIn = props.onSignIn;
 	const Component = props.component;
+	
 	useEffect(() => {
 		if(!isLoggedIn) {
 			onSignIn();

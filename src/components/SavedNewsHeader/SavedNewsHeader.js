@@ -27,7 +27,7 @@ function SavedNewsHeader({ menuButtonVisible, onLogOut }) {
           ></button>
         )}
       </div>
-      <SavedNewsNav isOpen={expanded} onLogOut={onLogOut}/>
+      <SavedNewsNav isOpen={expanded} onLogOut={onLogOut} />
       {expanded && <div className="header__overlay"></div>}
     </header>
   );

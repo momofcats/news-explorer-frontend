@@ -34,7 +34,7 @@ const useForm = ({ onSubmit }) => {
     },
     [setValues, setErrors, setIsValid]
   );
-  return { values, handleChange, handleSubmit, handleInvalid, resetForm, errors, isValid, resetForm };
+  return { values, handleChange, handleSubmit, handleInvalid, resetForm, errors, isValid };
 };
 
 export default useForm;

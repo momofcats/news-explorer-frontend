@@ -68,6 +68,8 @@ function SignUpPopup(props) {
           onInvalid={handleInvalid}
         />
         <span className="form__input-error">{errors.userName}</span>
+        <div className="form__button-wrapper">
+        <span className="form__server-message">{props.serverMessage}</span>
         <button
           className={`button ${
             isValid ? "button_type_primary" : "button_type_disabled"
@@ -77,6 +79,8 @@ function SignUpPopup(props) {
         >
           Sign up
         </button>
+        </div>
+        
       </form>
       <div className="form__wrapper">
         <p>or</p>
