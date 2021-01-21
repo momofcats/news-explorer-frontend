@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withRouter, Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
@@ -101,13 +101,13 @@ const App = () => {
     setArticlesToShow([]);
     history.push("/");
   }
+const closeAllPopups = useCallback(() => {
+  setIsInfoToolTipPopupOpen(false);
+  setIsSignInPopupOpen(false);
+  setIsSignUpPopupOpen(false);
+  setIsMenuButtonVisible(true);
+},[setIsInfoToolTipPopupOpen, setIsSignInPopupOpen, setIsSignUpPopupOpen, setIsMenuButtonVisible]);
 
-  function closeAllPopups() {
-    setIsInfoToolTipPopupOpen(false);
-    setIsSignInPopupOpen(false);
-    setIsSignUpPopupOpen(false);
-    setIsMenuButtonVisible(true);
-  }
   function handleNewsSearch(keyword) {
     localStorage.removeItem("storedArticles");
     setIsNothingFound(false);
@@ -173,11 +173,11 @@ const App = () => {
     setIsSignInPopupOpen(true);
   }
 
-  function handleEscKey(evt) {
+  const handleEscKey = useCallback((evt) => {
     if (evt.key === "Escape") {
       closeAllPopups();
     }
-  }
+  }, [closeAllPopups]);
 
   useEffect(() => {
     const storedArticles = JSON.parse(localStorage.getItem("storedArticles"));
@@ -193,7 +193,7 @@ const App = () => {
     return () => {
       document.removeEventListener("keydown", handleEscKey);
     };
-  }, []);
+  }, [handleEscKey]);
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
