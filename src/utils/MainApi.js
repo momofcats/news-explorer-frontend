@@ -112,7 +112,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://api.ykhilko.news-explorer.students.nomoreparties.site",
 });
 
 export default mainApi;
