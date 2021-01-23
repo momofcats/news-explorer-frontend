@@ -16,7 +16,7 @@ function SavedNewsPage(props) {
       ) : (
         <>
           <SavedArticles savedNews={props.savedNews} />
-          <SavedNews savedNews={props.savedNews} onDelete={props.onDelete} />
+          {props.savedNews.length !== 0 && <SavedNews savedNews={props.savedNews} onDelete={props.onDelete} />}
         </>
       )}
     </>
