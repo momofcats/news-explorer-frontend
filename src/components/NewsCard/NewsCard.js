@@ -4,8 +4,11 @@ import "./NewsCard.css";
 
 function NewsCard(props) {
   const article = props.article;
+  
+
   return (
     <li className="card">
+      <a className="card__link" href={article.url}>
       {article.urlToImage && (
         <img className="card__img" src={article.urlToImage} alt="article" />
       )}
@@ -18,6 +21,7 @@ function NewsCard(props) {
         <p className="card__text">{article.description}</p>
         <p className="card__source">{article.source}</p>
       </div>
+      </a>
     </li>
   );
 }

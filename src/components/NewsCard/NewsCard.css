@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.card__link {
+  text-decoration: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
 .card__img {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
