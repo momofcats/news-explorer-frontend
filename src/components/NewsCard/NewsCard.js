@@ -8,7 +8,7 @@ function NewsCard(props) {
 
   return (
     <li className="card">
-      <a className="card__link" href={article.url}>
+      
       {article.urlToImage && (
         <img className="card__img" src={article.urlToImage} alt="article" />
       )}
@@ -17,11 +17,12 @@ function NewsCard(props) {
         <p className="card__date">
           {dayjs(article.publishedAt).format("MMMM D, YYYY")}
         </p>
+        <a className="card__link" href={article.url}>
         <h2 className="card__title">{article.title}</h2>
+        </a>
         <p className="card__text">{article.description}</p>
         <p className="card__source">{article.source}</p>
       </div>
-      </a>
     </li>
   );
 }
