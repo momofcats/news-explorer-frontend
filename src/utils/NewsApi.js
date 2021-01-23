@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
+import { KEY } from "./constants";
 const now = dayjs();
   const currentDate = now.format('YYYY-MM-DD');
   const pastDate = now.subtract(7, 'day').format('YYYY-MM-DD');
-  const KEY = "9b8c2025d24e4347b94b2eb0e72a7dc3";
 class NewsApi {
   constructor(options) {
     this.options = options;

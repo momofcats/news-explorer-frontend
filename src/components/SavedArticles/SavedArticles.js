@@ -19,7 +19,7 @@ function sortByFrequency(array) {
   });
 }
 
-function concatinateArrayElem(arr,x,y) {
+function concatinateArrayElem(arr, x, y) {
   if (arr.length <= x) {
     return arr.join(", ");
   } else {
@@ -35,10 +35,14 @@ function SavedArticles({ savedNews }) {
       a.push(e.charAt(0).toUpperCase() + e.substr(1));
       return a;
     }, []);
-   
+
   const sortedKeywords = sortByFrequency(keywords);
-  const concatinatedKeywords = concatinateArrayElem(sortedKeywords, MAXITEMS, TRUNCATEDITEMS);
-  
+  const concatinatedKeywords = concatinateArrayElem(
+    sortedKeywords,
+    MAXITEMS,
+    TRUNCATEDITEMS
+  );
+
   return (
     <section className="savedArticles">
       <h1 className="savedArticles__title">Saved Articles</h1>
@@ -47,9 +51,7 @@ function SavedArticles({ savedNews }) {
       </p>
       <p>
         By keywords:{" "}
-        <span className="savedArticles__accent">
-          {concatinatedKeywords}.
-        </span>
+        <span className="savedArticles__accent">{concatinatedKeywords}.</span>
       </p>
     </section>
   );

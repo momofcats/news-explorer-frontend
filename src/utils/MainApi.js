@@ -1,118 +1,116 @@
 class MainApi {
-    constructor(options) {
-        this.options = options;
-    }
-	
-	setToken(token) {
-		this.token = token;
-	}
+  constructor(options) {
+    this.options = options;
+  }
 
-	getUser() {
-		return fetch(`${this.options.baseUrl}/users/me`, {
-			method: 'GET',
-			headers: {
-				"Content-Type": "application/json",
-				'Authorization': `Bearer ${this.token}`,
-			},
-		}).then(async (res) => {
-			if (res.ok) {
-				return res.json();
-			}
-			const body = await res.json();
-			return Promise.reject(body.error || body.message);
-		});
-	}
+  setToken(token) {
+    this.token = token;
+  }
 
-	getSavedArticles() {
-		return fetch(`${this.options.baseUrl}/articles`, {
-			method: 'GET',
-			headers: {
-				"Content-Type": "application/json",
-				'Authorization': `Bearer ${this.token}`,
-			},
-		}).then(async (res) => {
-			if (res.ok) {
-				return res.json();
-			}
-			const body = await res.json();
-			return Promise.reject(body.error || body.message);
-		});
-	}
+  getUser() {
+    return fetch(`${this.options.baseUrl}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.token}`,
+      },
+    }).then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      const body = await res.json();
+      return Promise.reject(body.error || body.message);
+    });
+  }
 
-	getAppInfo() {
-		return Promise.all([this.getSavedArticles(), this.getUser()]);
-	}
-	
-	addBookmark(article) {
+  getSavedArticles() {
+    return fetch(`${this.options.baseUrl}/articles`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.token}`,
+      },
+    }).then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      const body = await res.json();
+      return Promise.reject(body.error || body.message);
+    });
+  }
 
-		return fetch(`${this.options.baseUrl}/articles`, {
-			method: 'POST',
-			headers: {
-				"Content-Type": "application/json",
-				'Authorization': `Bearer ${this.token}`,
-			},
-			body: JSON.stringify({
-				keyword: article.keyword,
-				title: article.title,
-				description: article.description,
-				publishedAt: article.publishedAt,
-				source: article.source,
-				url: article.url,
-				urlToImage: article.urlToImage,
-			})
-		}).then(async (res) => {
-			if (res.ok) {
-				return res.json();
-			}
-			const body = await res.json();
-			return Promise.reject(body.error || body.message);
-		});
-	}
+  getAppInfo() {
+    return Promise.all([this.getSavedArticles(), this.getUser()]);
+  }
 
-	removeBookmark(articleId) {
-		return fetch(`${this.options.baseUrl}/articles/${articleId}`, {
-			method: 'DELETE',
-			headers: {
-				"Content-Type": "application/json",
-				'Authorization': `Bearer ${this.token}`,
-			},
-		}).then(async (res) => {
-			if (res.ok) {
-				return res.json();
-			}
-			const body = await res.json();
-			return Promise.reject(body.error || body.message);
-		});
-	}
+  addBookmark(article) {
+    return fetch(`${this.options.baseUrl}/articles`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.token}`,
+      },
+      body: JSON.stringify({
+        keyword: article.keyword,
+        title: article.title,
+        description: article.description,
+        publishedAt: article.publishedAt,
+        source: article.source,
+        url: article.url,
+        urlToImage: article.urlToImage,
+      }),
+    }).then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      const body = await res.json();
+      return Promise.reject(body.error || body.message);
+    });
+  }
 
-	register(credentials) {
-		return this.request("/signup", "POST", JSON.stringify(credentials));
-    }
+  removeBookmark(articleId) {
+    return fetch(`${this.options.baseUrl}/articles/${articleId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.token}`,
+      },
+    }).then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      const body = await res.json();
+      return Promise.reject(body.error || body.message);
+    });
+  }
 
-    authorize(credentials) {
-		return this.request("/signin", "POST", JSON.stringify(credentials))
-	}
-    
-	request(mainApi, method, body) {
-		return fetch(`${this.options.baseUrl}${mainApi}`, {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method,
-			body,
-		}).then(async (res) => {
-			if (res.ok) {
-				return res.json();
-			}
-			const body = await res.json();
-			return Promise.reject(body.error || body.message);
-		});
-    }
-    
+  register(credentials) {
+    return this.request("/signup", "POST", JSON.stringify(credentials));
+  }
+
+  authorize(credentials) {
+    return this.request("/signin", "POST", JSON.stringify(credentials));
+  }
+
+  request(mainApi, method, body) {
+    return fetch(`${this.options.baseUrl}${mainApi}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method,
+      body,
+    }).then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      const body = await res.json();
+      return Promise.reject(body.error || body.message);
+    });
+  }
 }
 
 const mainApi = new MainApi({
-    baseUrl: "https://api.ykhilko.news-explorer.students.nomoreparties.site",
+  baseUrl: "https://api.ykhilko.news-explorer.students.nomoreparties.site",
 });
 
 export default mainApi;
