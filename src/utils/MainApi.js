@@ -7,50 +7,31 @@ class MainApi {
     this.token = token;
   }
 
+  register(credentials) {
+    return this.authRequest("/signup", "POST", JSON.stringify(credentials));
+  }
+
+  authorize(credentials) {
+    return this.authRequest("/signin", "POST", JSON.stringify(credentials));
+  }
+
   getUser() {
-    return fetch(`${this.options.baseUrl}/users/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
-      },
-    }).then(async (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      const body = await res.json();
-      return Promise.reject(body.error || body.message);
-    });
+    return this.request("/users/me", "GET");
   }
 
   getSavedArticles() {
-    return fetch(`${this.options.baseUrl}/articles`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
-      },
-    }).then(async (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      const body = await res.json();
-      return Promise.reject(body.error || body.message);
-    });
+    return this.request("/articles", "GET");
   }
-
+  
   getAppInfo() {
     return Promise.all([this.getSavedArticles(), this.getUser()]);
   }
 
   addBookmark(article) {
-    return fetch(`${this.options.baseUrl}/articles`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
-      },
-      body: JSON.stringify({
+    return this.request(
+      "/articles",
+      "POST",
+      JSON.stringify({
         keyword: article.keyword,
         title: article.title,
         description: article.description,
@@ -58,23 +39,22 @@ class MainApi {
         source: article.source,
         url: article.url,
         urlToImage: article.urlToImage,
-      }),
-    }).then(async (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      const body = await res.json();
-      return Promise.reject(body.error || body.message);
-    });
+      })
+    );
   }
 
   removeBookmark(articleId) {
-    return fetch(`${this.options.baseUrl}/articles/${articleId}`, {
-      method: "DELETE",
+    return this.request(`/articles/${articleId}`, "DELETE");
+  }
+
+  request(mainApi, method, body) {
+    return fetch(`${this.options.baseUrl}${mainApi}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
+        "Authorization": `Bearer ${this.token}`,
       },
+      method,
+      body,
     }).then(async (res) => {
       if (res.ok) {
         return res.json();
@@ -84,15 +64,7 @@ class MainApi {
     });
   }
 
-  register(credentials) {
-    return this.request("/signup", "POST", JSON.stringify(credentials));
-  }
-
-  authorize(credentials) {
-    return this.request("/signin", "POST", JSON.stringify(credentials));
-  }
-
-  request(mainApi, method, body) {
+  authRequest(mainApi, method, body) {
     return fetch(`${this.options.baseUrl}${mainApi}`, {
       headers: {
         "Content-Type": "application/json",
