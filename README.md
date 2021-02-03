@@ -1,6 +1,6 @@
 # News Explorer App
 
-Link to gitgub pages [Create React App](https://github.com/facebook/create-react-app).
+[Link to gitgub pages](https://momofcats.github.io/news-explorer-frontend/).
 
 ## App Overview
 This app was created as a part of Practicum by Yandex educational curriculum.
