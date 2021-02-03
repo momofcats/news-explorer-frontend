@@ -36,6 +36,7 @@ function SignUpPopup(props) {
           value={values.email ?? ""}
           onChange={handleChange}
           onInvalid={handleInvalid}
+          disabled={props.isDisabledInput}
         />
         <span className="form__input-error">{errors.email}</span>
         <label className="form__input-label" htmlFor="password">
@@ -50,6 +51,8 @@ function SignUpPopup(props) {
           value={values.password ?? ""}
           onChange={handleChange}
           onInvalid={handleInvalid}
+          disabled={props.isDisabledInput}
+
         />
         <span className="form__input-error">{errors.password}</span>
         <label className="form__input-label" htmlFor="username">
@@ -66,6 +69,7 @@ function SignUpPopup(props) {
           value={values.userName ?? ""}
           onChange={handleChange}
           onInvalid={handleInvalid}
+          disabled={props.isDisabledInput}
         />
         <span className="form__input-error">{errors.userName}</span>
         <div className="form__button-wrapper">

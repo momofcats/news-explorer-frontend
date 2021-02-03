@@ -35,6 +35,7 @@ const App = () => {
   const [savedNews, setSavedNews] = useState([]);
   const [isSendingRequest, setIsSendingRequest] = useState(true);
   const [serverMessage, setServerMessage] = useState("");
+  const [isDisabledInput, setIsDisabledInput] = useState(false);
 
   function handleArticleBookmark(article) {
     const bookmarkedArticle = savedNews.find((i) => i.title === article.title);
@@ -79,18 +80,22 @@ const App = () => {
   }
 
   function handleRegister(credentials) {
+    setIsDisabledInput(true);
     mainApi
       .register(credentials)
       .then(() => {
         closeAllPopups();
         handleSignUpSuccess();
+        setIsDisabledInput(false);
       })
       .catch((err) => {
         setServerMessage(err);
+        setIsDisabledInput(false);
       });
   }
 
   function handleLogin(credentials) {
+    setIsDisabledInput(true);
     mainApi
       .authorize(credentials)
       .then((data) => {
@@ -99,10 +104,12 @@ const App = () => {
       })
       .then(() => {
         setIsLoggedIn(true);
+        setIsDisabledInput(false);
         closeAllPopups();
       })
       .catch((err) => {
         setServerMessage(err);
+        setIsDisabledInput(false);
       });
   }
 
@@ -290,6 +297,7 @@ const App = () => {
           onSignUpClick={handleSignUpClick}
           onLogin={handleLogin}
           serverMessage={serverMessage}
+          isDisabledInput={isDisabledInput}
         />
       )}
 
@@ -300,6 +308,7 @@ const App = () => {
           onSignInClick={handleSignInClick}
           onRegister={handleRegister}
           serverMessage={serverMessage}
+          isDisabledInput={isDisabledInput}
         />
       )}
       <InfoToolTip

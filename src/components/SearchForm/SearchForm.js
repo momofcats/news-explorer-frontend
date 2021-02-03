@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 import useForm from "../UseForm/useForm.js";
 
 function SearchForm(props) {
+
   const { handleSubmit, handleChange, handleInvalid, values, errors } = useForm(
     {
       onSubmit: submit,
@@ -28,6 +29,7 @@ function SearchForm(props) {
           value={values.keyword ?? ""}
           name="keyword"
           required
+          disabled={props.isLoading}
         />
         <button
           type="submit"

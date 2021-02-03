@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "../Popup/Popup";
 import useForm from "../UseForm/useForm.js";
 
-function SignInPopup({ onClose, isOpen, serverMessage, onLogin, onSignUpClick }) {
+function SignInPopup({ onClose, isOpen, serverMessage, onLogin, onSignUpClick, isDisabledInput }) {
   const {
     handleSubmit,
     handleChange,
@@ -38,6 +38,8 @@ function SignInPopup({ onClose, isOpen, serverMessage, onLogin, onSignUpClick })
           value={values.email ?? ""}
           onChange={handleChange}
           onInvalid={handleInvalid}
+          disabled={isDisabledInput}
+
         />
         <span className="form__input-error">{errors.email}</span>
         <label className="form__input-label" htmlFor="password">
@@ -52,6 +54,7 @@ function SignInPopup({ onClose, isOpen, serverMessage, onLogin, onSignUpClick })
           value={values.password ?? ""}
           onChange={handleChange}
           onInvalid={handleInvalid}
+          disabled={isDisabledInput}
         />
         <span className="form__input-error">{errors.password}</span>
         <div className="form__button-wrapper">

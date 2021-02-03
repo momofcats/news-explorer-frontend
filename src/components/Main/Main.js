@@ -7,32 +7,46 @@ import NewsCardsList from "../NewsCardList/NewsCardList";
 import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
 
-function Main(props) {
+function Main({
+  onSignIn,
+  menuButtonVisible,
+  isLoggedIn,
+  isLoading,
+  onLogOut,
+  onSearch,
+  isNothingFound,
+  errorMessage,
+  isSearching,
+  articles,
+  isShowMoreVisible,
+  onShowMore,
+  onBookmarkClick,
+}) {
   return (
     <>
       <section className="main">
         <div className="main__overlay">
           <Header
-            onSignIn={props.onSignIn}
-            menuButtonVisible={props.menuButtonVisible}
-            isLoggedIn={props.isLoggedIn}
-            onLogOut={props.onLogOut}
+            onSignIn={onSignIn}
+            menuButtonVisible={menuButtonVisible}
+            isLoggedIn={isLoggedIn}
+            onLogOut={onLogOut}
           />
-          <SearchForm onSearch={props.onSearch} />
+          <SearchForm onSearch={onSearch} isLoading={isLoading}/>
         </div>
       </section>
-      {props.isNothingFound && <NotFound>{props.errorMessage}</NotFound>}
-      {props.isLoading && <Preloader />}
-      {props.isSearching && (
+      {isNothingFound && <NotFound>{errorMessage}</NotFound>}
+      {isLoading && <Preloader />}
+      {isSearching && (
         <NewsCardsList
-          articles={props.articles}
-          isShowMoreVisible={props.isShowMoreVisible}
-          onShowMore={props.onShowMore}
-          isLoggedIn={props.isLoggedIn}
-          onBookmarkClick={props.onBookmarkClick}
+          articles={articles}
+          isShowMoreVisible={isShowMoreVisible}
+          onShowMore={onShowMore}
+          isLoggedIn={isLoggedIn}
+          onBookmarkClick={onBookmarkClick}
         />
       )}
-      
+
       <About />
     </>
   );

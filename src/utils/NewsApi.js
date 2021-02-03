@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
-import { KEY } from "./constants";
+import { KEY, MAXDAYS } from "./constants";
+
 const now = dayjs();
   const currentDate = now.format('YYYY-MM-DD');
-  const pastDate = now.subtract(7, 'day').format('YYYY-MM-DD');
+  const pastDate = now.subtract(MAXDAYS, 'day').format('YYYY-MM-DD');
 class NewsApi {
   constructor(options) {
     this.options = options;
