@@ -4,7 +4,7 @@ Link to gitgub pages [Create React App](https://github.com/facebook/create-react
 
 ## App Overview
 This app was created as a part of Practicum by Yandex educational curriculum.
-The app allows the user to search  news articles by keywords. The search results are displayed below the search bar. The fetched articles dates are withering 7 days of a search date. The user is able to create an account and log into it. If the user was previously logged in the page won’t prompt the user and display the content with this user’s data.  If the user is logged in, he is able to bookmark and unbookmark the articles. Saved articles are shown on the saved articles page. The user can remove articles by clicking on a trash can icon on a news card. Also, the user can navigate to an article source upon clicking on an article’s title. 
+The app allows the user to search  news articles by keywords. The search results are displayed below the search bar. The fetched articles dates are withing 7 days of a search date. The user is able to create an account and log into it. If the user was previously logged in the page won’t prompt the user and display the content with this user’s data.  If the user is logged in, he is able to bookmark and unbookmark the articles. Saved articles are shown on the saved articles page. The user can remove articles by clicking on a trash can icon on a news card. Also, the user can navigate to an article source upon clicking on an article’s title. 
 
 ## Technologies Used
 
