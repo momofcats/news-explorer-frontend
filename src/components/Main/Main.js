@@ -2,7 +2,6 @@ import React from "react";
 import "./Main.css";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import About from "../About/About";
 import NewsCardsList from "../NewsCardList/NewsCardList";
 import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
@@ -47,7 +46,6 @@ function Main({
         />
       )}
 
-      <About />
     </>
   );
 }
