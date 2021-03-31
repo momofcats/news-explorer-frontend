@@ -5,6 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import NewsCardsList from "../NewsCardList/NewsCardList";
 import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader";
+import About from "../About/About";
 
 function Main({
   onSignIn,
@@ -33,6 +34,7 @@ function Main({
           />
           <SearchForm onSearch={onSearch} isLoading={isLoading}/>
         </div>
+        <About />
       </section>
       {isNothingFound && <NotFound>{errorMessage}</NotFound>}
       {isLoading && <Preloader />}

@@ -13,6 +13,7 @@ const useForm = ({ onSubmit }) => {
     setIsValid(target.closest("form").checkValidity());
   };
 
+  // prevents a standard html validation api to display a validation message
   const handleInvalid = (e) => {
     e.preventDefault();
   };
